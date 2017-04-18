@@ -1,3 +1,8 @@
+/*
+	文件名：fileIO.c
+	描述：用于对文件的操作，包括读取、写入
+*/
+
 #include "fileIO.h"
 
 /*
@@ -9,7 +14,7 @@
 void readFile(md_t n, FILE* fl)
 {
     int readbuf;
-    int i;
+    UINT i;
     UINT size;
     ULONG linkid;
     UINT roadnamesize;

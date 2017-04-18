@@ -2,6 +2,13 @@
 #include "fileIO.h"
 #include "linkOp.h"
 
+void delay(int ms)
+{
+	int i, j;
+	for (i = 0; i < ms; i++)
+		for (j = 0; j < 535; j++);
+}
+
 int main(void)
 {
     FILE* fl_GTBL;
@@ -19,7 +26,6 @@ int main(void)
     ln_t tail_l;
     ln_t head_l = listInit();
     tail_l = head_l;
-    int i = 0;
     ln_t node;
 
     FILE* fp;   //用于记录文件尾部的位置
@@ -31,16 +37,20 @@ int main(void)
     {
         node = (ln_t)malloc(sizeof(linkn_t));
         readFile(&node->data, fl_GTBL);
-        node->prior = tail_l;
         tail_l->next = node;
         tail_l = node;
         tail_l->next = NULL;
-        i++;
     }
+	delay(2000);
+	head_l = insert_sort(head_l);
+	tail_l = head_l->next;
+	while (tail_l != NULL)
+	{
+		printf("%ld\n", tail_l->data.linkid);
+	}
     //writeFile(&n, fl_SOURCELINK);
-    printf("\n%d", i);
     fclose(fl_GTBL);
-//    fclose(fl_SOURCELINK);
+    //fclose(fl_SOURCELINK);
     free(fp);
     getchar();
     return 0;

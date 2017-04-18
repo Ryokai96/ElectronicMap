@@ -4,7 +4,7 @@
 #include <stdio.h>
 #include <stdlib.h>
 
-typedef char   INT;
+typedef char INT;
 typedef unsigned char UCHAR;
 typedef unsigned short UINT;
 typedef unsigned long ULONG;
@@ -22,9 +22,9 @@ typedef struct {
     UCHAR* roadname;
 } mapd_t, *md_t;
 
-#define GTBL_PATH "D:/Qt/Qt5.2.1/Tools/QtCreator/bin/Electronic_map/Date/GTBL.dat"
-#define SOURCELINK_PATH "D:/Qt/Qt5.2.1/Tools/QtCreator/bin/Electronic_map/Date/sourcelink.txt"
-//#define GTBL_PATH C:/Users/Ryoukai/Documents/Visual Studio 2017/Projects/ElectronicMap/ElectronicMap/Date/GTBL.dat
-//#define SOURCELINK_PATH C:/Users/Ryoukai/Documents/Visual Studio 2017/Projects/ElectronicMap/ElectronicMap/Date/sourcelink.txt
+//#define GTBL_PATH "D:/Qt/Qt5.2.1/Tools/QtCreator/bin/Electronic_map/Date/GTBL.dat"
+//#define SOURCELINK_PATH "D:/Qt/Qt5.2.1/Tools/QtCreator/bin/Electronic_map/Date/sourcelink.txt"
+#define GTBL_PATH "C:/Users/Ryoukai/Documents/Visual Studio 2017/Projects/ElectronicMap/ElectronicMap/Data/GTBL.dat"
+#define SOURCELINK_PATH "C:/Users/Ryoukai/Documents/Visual Studio 2017/Projects/ElectronicMap/ElectronicMap/Data/sourcelink.txt"
 
 #endif // HEADER_H
