@@ -22,10 +22,13 @@ int main(void)
     int i = 0;
     ln_t node;
 
-    while(!feof(fl_GTBL))
+    FILE* fp;   //用于记录文件尾部的位置
+    fseek(fl_GTBL, 0, 2);   //把文件内部指针移动到文件尾部
+    fp = ftell(fl_GTBL);    //记录文件尾部的位置
+    fseek(fl_GTBL, 0, 0);   //把文件内部指针移动到文件头部
+
+    while(fp != ftell(fl_GTBL)) //当文件内部指针到了文件尾部，则结束循环
     {
-        if(feof(fl_GTBL))
-            break;
         node = (ln_t)malloc(sizeof(linkn_t));
         readFile(&node->data, fl_GTBL);
         node->prior = tail_l;
@@ -38,6 +41,7 @@ int main(void)
     printf("\n%d", i);
     fclose(fl_GTBL);
 //    fclose(fl_SOURCELINK);
+    free(fp);
     getchar();
     return 0;
 }
