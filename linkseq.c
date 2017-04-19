@@ -1,57 +1,57 @@
 /*
-	æ–‡ä»¶åï¼šlinkseq.c
-    æè¿°ï¼šå•å‘é“¾è¡¨çš„æ’åºï¼ŒåŒ…æ‹¬æ’å…¥æ’åºã€å†’æ³¡æ’åºã€å¸Œå°”æ’åºã€é€‰æ‹©æ’åºã€å¿«é€Ÿæ’åº
+	ÎÄ¼şÃû£ºlinkseq.c
+    ÃèÊö£ºµ¥ÏòÁ´±íµÄÅÅĞò£¬°üÀ¨²åÈëÅÅĞò¡¢Ã°ÅİÅÅĞò¡¢Ñ¡ÔñÅÅĞò¡¢¿ìËÙÅÅĞò
 */
 
 #include "linkOp.h"
 
 /*
-    å‡½æ•°åï¼šlink_insert_sort
-	å‡½æ•°åŠŸèƒ½ï¼šå•å‘é“¾è¡¨çš„æ’å…¥æ’åº(ä»å°åˆ°å¤§)
-	å‚æ•°ï¼šéœ€è¦æ’åºçš„é“¾è¡¨çš„å¤´èŠ‚ç‚¹ head
-	è¿”å›å€¼ï¼šæ’å¥½åºçš„é“¾è¡¨çš„å¤´èŠ‚ç‚¹
+    º¯ÊıÃû£ºlink_insert_sort
+	º¯Êı¹¦ÄÜ£ºµ¥ÏòÁ´±íµÄ²åÈëÅÅĞò(´ÓĞ¡µ½´ó)
+	²ÎÊı£ºĞèÒªÅÅĞòµÄÁ´±íµÄÍ·½Úµã head
+	·µ»ØÖµ£ºÅÅºÃĞòµÄÁ´±íµÄÍ·½Úµã
 */
 ln_t link_insert_sort(ln_t head)
 {
-    time_t start, end;  //è®°å½•ç¨‹åºè¿è¡Œæ—¶é—´
-    start = time(NULL); //è®°å½•ç¨‹åºè¿è¡Œå¼€å§‹æ—¶é—´
+    time_t start, end;  //¼ÇÂ¼³ÌĞòÔËĞĞÊ±¼ä
+    start = time(NULL); //¼ÇÂ¼³ÌĞòÔËĞĞ¿ªÊ¼Ê±¼ä
 
-	ln_t node = head->next;	//nodeè¡¨ç¤ºå½“å‰ä½œæ¯”è¾ƒçš„èŠ‚ç‚¹
-	ln_t phead = NULL;	//pheadä¸ºæ’å¥½åºçš„é“¾è¡¨çš„å¤´èŠ‚ç‚¹
+	ln_t node = head->next;	//node±íÊ¾µ±Ç°×÷±È½ÏµÄ½Úµã
+	ln_t phead = NULL;	//pheadÎªÅÅºÃĞòµÄÁ´±íµÄÍ·½Úµã
 	if (node == NULL)
 	{
 		printf("empty linklist\n");
 		return NULL;
 	}
 
-	phead = listInit();	//åˆå§‹åŒ–é“¾è¡¨
+	phead = listInit();	//³õÊ¼»¯Á´±í
 
-	unloadNode(head, node);	//å°†nodeä»headåé¢ç§»é™¤
+	unloadNode(head, node);	//½«node´ÓheadºóÃæÒÆ³ı
 	phead->next = node;
 
-    ln_t tail;	//tailç”¨äºéå†é“¾è¡¨phead
-    ln_t p; //pç”¨äºè®°å½•tailçš„ä¸‹ä¸€ä¸ªèŠ‚ç‚¹
+    ln_t tail;	//tailÓÃÓÚ±éÀúÁ´±íphead
+    ln_t p; //pÓÃÓÚ¼ÇÂ¼tailµÄÏÂÒ»¸ö½Úµã
 
-    //ä¸æ–­å°†headåçš„èŠ‚ç‚¹ç§»å‡ºæ¥å’Œpheadé“¾è¡¨ä¸­èŠ‚ç‚¹é€ä¸ªæ¯”è¾ƒï¼Œè‹¥æ¯”æŸä¸ªèŠ‚ç‚¹å°ï¼Œåˆ™æ’å…¥åˆ°è¿™ä¸ªèŠ‚ç‚¹å‰ï¼Œè‹¥æ²¡æœ‰æ¯”è¿™ä¸ªå…ƒç´ å¤§çš„å…ƒç´ ï¼Œåˆ™æ’åˆ°pheadé“¾è¡¨æœ«å°¾
+    //²»¶Ï½«headºóµÄ½ÚµãÒÆ³öÀ´ºÍpheadÁ´±íÖĞ½ÚµãÖğ¸ö±È½Ï£¬Èô±ÈÄ³¸ö½ÚµãĞ¡£¬Ôò²åÈëµ½Õâ¸ö½ÚµãÇ°£¬ÈôÃ»ÓĞ±ÈÕâ¸öÔªËØ´óµÄÔªËØ£¬Ôò²åµ½pheadÁ´±íÄ©Î²
 	while (head->next != NULL)
 	{
 		node = head->next;
-		unloadNode(head, node);	//å°†nodeä»headåé¢ç§»é™¤
+		unloadNode(head, node);	//½«node´ÓheadºóÃæÒÆ³ı
 		tail = phead;
         p = tail->next;
         while (1)
         {
-            if (node->data.linkid > p->data.linkid)	//æ¯”è¾ƒnodeå’Œtail->nextçš„linkidå€¼çš„å¤§å°
+            if (node->data.linkid > p->data.linkid)	//±È½ÏnodeºÍtail->nextµÄlinkidÖµµÄ´óĞ¡
 			{
                 tail = tail->next;
 			}
 			else
 			{
-                insertToList(tail, node);	//å°†nodeæ’åˆ°tailåï¼Œç»“æŸå¾ªç¯
+                insertToList(tail, node);	//½«node²åµ½tailºó£¬½áÊøÑ­»·
                 break;
 			}
             p = tail->next;
-            if(p == NULL)   //å¦‚æœpheadé“¾è¡¨å·²å¾ªç¯å®Œï¼Œä¸”å¹¶æ²¡æœ‰æ‰¾åˆ°æ¯”nodeå¤§çš„å…ƒç´ ï¼Œå°†nodeæ¥åˆ°pheadé“¾è¡¨å°¾éƒ¨
+            if(p == NULL)   //Èç¹ûpheadÁ´±íÒÑÑ­»·Íê£¬ÇÒ²¢Ã»ÓĞÕÒµ½±Ènode´óµÄÔªËØ£¬½«node½Óµ½pheadÁ´±íÎ²²¿
             {
                 insertToList(tail, node);
                 break;
@@ -65,23 +65,23 @@ ln_t link_insert_sort(ln_t head)
 
     free(head);
 
-    end = time(NULL);   //è®°å½•ç¨‹åºè¿è¡Œç»“æŸæ—¶é—´
+    end = time(NULL);   //¼ÇÂ¼³ÌĞòÔËĞĞ½áÊøÊ±¼ä
 
-    printf("link_insert_sort have spend %d s\n", (int)difftime(end,start)); //æ‰“å°æ•´ä¸ªå‡½æ•°è¿è¡Œæ—¶é—´
+    printf("link_insert_sort have spend %d s\n", (int)difftime(end,start)); //´òÓ¡Õû¸öº¯ÊıÔËĞĞÊ±¼ä
 
 	return phead;
 }
 
 /*
-    å‡½æ•°åï¼šlink_bubble_sort
-    å‡½æ•°åŠŸèƒ½ï¼šå•å‘é“¾è¡¨çš„å†’æ³¡æ’åº(ä»å°åˆ°å¤§)
-    å‚æ•°ï¼šéœ€è¦æ’åºçš„é“¾è¡¨çš„å¤´èŠ‚ç‚¹ head
-    è¿”å›å€¼ï¼šæ’å¥½åºçš„é“¾è¡¨çš„å¤´èŠ‚ç‚¹
+    º¯ÊıÃû£ºlink_bubble_sort
+    º¯Êı¹¦ÄÜ£ºµ¥ÏòÁ´±íµÄÃ°ÅİÅÅĞò(´ÓĞ¡µ½´ó)
+    ²ÎÊı£ºĞèÒªÅÅĞòµÄÁ´±íµÄÍ·½Úµã head
+    ·µ»ØÖµ£ºÅÅºÃĞòµÄÁ´±íµÄÍ·½Úµã
 */
 ln_t link_bubble_sort(ln_t head)
 {
-    time_t start, end;  //è®°å½•ç¨‹åºè¿è¡Œæ—¶é—´
-    start = time(NULL); //è®°å½•ç¨‹åºè¿è¡Œå¼€å§‹æ—¶é—´
+    time_t start, end;  //¼ÇÂ¼³ÌĞòÔËĞĞÊ±¼ä
+    start = time(NULL); //¼ÇÂ¼³ÌĞòÔËĞĞ¿ªÊ¼Ê±¼ä
 
     if(head->next == NULL)
     {
@@ -90,22 +90,22 @@ ln_t link_bubble_sort(ln_t head)
     }
 
     ln_t node = head->next;
-    ln_t outl = head->next; //ç”¨äºæ§åˆ¶å¤–å±‚å¾ªç¯
-    ln_t inl = head->next;  //ç”¨äºæ§åˆ¶å†…å±‚å¾ªç¯
+    ln_t outl = head->next; //ÓÃÓÚ¿ØÖÆÍâ²ãÑ­»·
+    ln_t inl = head->next;  //ÓÃÓÚ¿ØÖÆÄÚ²ãÑ­»·
 
-    //ä¸¤ä¸ªä¸¤ä¸ªèŠ‚ç‚¹è¿›è¡Œæ¯”è¾ƒï¼Œè¾ƒå¤§çš„èŠ‚ç‚¹æ”¾åœ¨åé¢ï¼Œè¿›è¡Œlen-1æ¬¡æ¯”è¾ƒï¼Œå°±å¯æŠŠæœ€å¤§çš„èŠ‚ç‚¹æ”¾åœ¨æœ€å
+    //Á½¸öÁ½¸ö½Úµã½øĞĞ±È½Ï£¬½Ï´óµÄ½Úµã·ÅÔÚºóÃæ£¬½øĞĞlen-1´Î±È½Ï£¬¾Í¿É°Ñ×î´óµÄ½Úµã·ÅÔÚ×îºó
     while(outl->next != NULL)
     {
         while(inl->next != NULL)
         {
-            if(node->data.linkid > node->next->data.linkid) //æ¯”è¾ƒä¸¤ä¸ªèŠ‚ç‚¹çš„å¤§å°
+            if(node->data.linkid > node->next->data.linkid) //±È½ÏÁ½¸ö½ÚµãµÄ´óĞ¡
             {
                 link_swap_node(node, node->next);
             }
             node = node->next;
             inl = inl->next;
         }
-        node = head->next;  //æ¯æ¬¡å¾ªç¯åï¼ŒæŠŠnodeæŒ‡å‘é“¾è¡¨é¦–å…ƒç´ 
+        node = head->next;  //Ã¿´ÎÑ­»·ºó£¬°ÑnodeÖ¸ÏòÁ´±íÊ×ÔªËØ
         outl = outl->next;
         inl = outl;
     }
@@ -114,48 +114,48 @@ ln_t link_bubble_sort(ln_t head)
     outl = NULL;
     inl = NULL;
 
-    end = time(NULL);   //è®°å½•ç¨‹åºè¿è¡Œç»“æŸæ—¶é—´
+    end = time(NULL);   //¼ÇÂ¼³ÌĞòÔËĞĞ½áÊøÊ±¼ä
 
-    printf("link_bubble_sort have spend %d s\n", (int)difftime(end,start)); //æ‰“å°æ•´ä¸ªå‡½æ•°è¿è¡Œæ—¶é—´
+    printf("link_bubble_sort have spend %d s\n", (int)difftime(end,start)); //´òÓ¡Õû¸öº¯ÊıÔËĞĞÊ±¼ä
 
     return head;
 }
 
 /*
-    å‡½æ•°åï¼šlink_select_sort
-    å‡½æ•°åŠŸèƒ½ï¼šå•å‘é“¾è¡¨çš„é€‰æ‹©æ’åº(ä»å°åˆ°å¤§)
-    å‚æ•°ï¼šéœ€è¦æ’åºçš„é“¾è¡¨çš„å¤´èŠ‚ç‚¹ head
-    è¿”å›å€¼ï¼šæ’å¥½åºçš„é“¾è¡¨çš„å¤´èŠ‚ç‚¹
+    º¯ÊıÃû£ºlink_select_sort
+    º¯Êı¹¦ÄÜ£ºµ¥ÏòÁ´±íµÄÑ¡ÔñÅÅĞò(´ÓĞ¡µ½´ó)
+    ²ÎÊı£ºĞèÒªÅÅĞòµÄÁ´±íµÄÍ·½Úµã head
+    ·µ»ØÖµ£ºÅÅºÃĞòµÄÁ´±íµÄÍ·½Úµã
 */
 ln_t link_select_sort(ln_t head)
 {
-    time_t start, end;  //è®°å½•ç¨‹åºè¿è¡Œæ—¶é—´
-    time(&start); //è®°å½•ç¨‹åºè¿è¡Œå¼€å§‹æ—¶é—´
+    time_t start, end;  //¼ÇÂ¼³ÌĞòÔËĞĞÊ±¼ä
+    time(&start); //¼ÇÂ¼³ÌĞòÔËĞĞ¿ªÊ¼Ê±¼ä
 
     if(link_empty(head) == 1)
     {
         return NULL;
     }
 
-    ln_t phead; //pheadç”¨äºå­˜æ”¾æ’åºå¥½çš„é“¾è¡¨çš„å¤´ç»“ç‚¹
-    phead = listInit(); //åˆå§‹åŒ–phead
+    ln_t phead; //pheadÓÃÓÚ´æ·ÅÅÅĞòºÃµÄÁ´±íµÄÍ·½áµã
+    phead = listInit(); //³õÊ¼»¯phead
 
     ln_t tail;
-    ln_t tnext;    //tnext æŒ‡å‘tailçš„ä¸‹ä¸€ä¸ªå…ƒç´ 
-    ln_t thear;          //thear æ ‡è®°tnextçš„ä¸Šä¸€ä¸ªå…ƒç´ 
-    ln_t ptail = phead;         //ptail æŒ‡å‘pheadé“¾è¡¨çš„æœ«å°¾
-    ln_t temp;   //æŒ‡å‘æœ¬æ¬¡å¾ªç¯æœ€å°çš„èŠ‚ç‚¹
+    ln_t tnext;    //tnext Ö¸ÏòtailµÄÏÂÒ»¸öÔªËØ
+    ln_t thear;          //thear ±ê¼ÇtnextµÄÉÏÒ»¸öÔªËØ
+    ln_t ptail = phead;         //ptail Ö¸ÏòpheadÁ´±íµÄÄ©Î²
+    ln_t temp;   //Ö¸Ïò±¾´ÎÑ­»·×îĞ¡µÄ½Úµã
 
-    //æ’åºé“¾è¡¨headä¸­æ‰¾åˆ°æœ€å°å…ƒç´ ï¼Œå°†å…¶å–å‡ºå­˜æ”¾pheadåï¼Œç„¶åï¼Œå†ä»headé“¾è¡¨å‰©ä½™å…ƒç´ ä¸­ç»§ç»­å¯»æ‰¾æœ€å°å…ƒç´ ï¼Œç„¶åå–å‡ºæ”¾åˆ°pheadé“¾è¡¨æœ«å°¾ã€‚ä»¥æ­¤ç±»æ¨ï¼Œç›´åˆ°æ‰€æœ‰å…ƒç´ å‡ä»headå–å‡ºã€‚
+    //ÅÅĞòÁ´±íheadÖĞÕÒµ½×îĞ¡ÔªËØ£¬½«ÆäÈ¡³ö´æ·Åpheadºó£¬È»ºó£¬ÔÙ´ÓheadÁ´±íÊ£ÓàÔªËØÖĞ¼ÌĞøÑ°ÕÒ×îĞ¡ÔªËØ£¬È»ºóÈ¡³ö·Åµ½pheadÁ´±íÄ©Î²¡£ÒÔ´ËÀàÍÆ£¬Ö±µ½ËùÓĞÔªËØ¾ù´ÓheadÈ¡³ö¡£
     while(head->next != NULL)
     {
-        //é‡ç½®å„æ ‡è®°
+        //ÖØÖÃ¸÷±ê¼Ç
         tail = head;
         tnext = tail->next;
         thear = tail;
         temp = tnext;
 
-        //å¾ªç¯é€‰å‡ºæœ€å°çš„å…ƒç´ ï¼Œè®©tempæŒ‡å‘å®ƒ
+        //Ñ­»·Ñ¡³ö×îĞ¡µÄÔªËØ£¬ÈÃtempÖ¸ÏòËü
         while(tnext != NULL)
         {
             if(tnext->data.linkid < temp->data.linkid)
@@ -167,9 +167,9 @@ ln_t link_select_sort(ln_t head)
             tnext = tnext->next;
         }
 
-        //å°†tempæ’åˆ°pheadå
-        unloadNode(thear, temp);    //å°†tempä»å…¶æ‰€åœ¨é“¾è¡¨å½“å‰ä½ç½®ç§»é™¤
-        insertToList(ptail, temp);  //å°†tempæ’å…¥åˆ°pheadé“¾è¡¨ç»“å°¾
+        //½«temp²åµ½pheadºó
+        unloadNode(thear, temp);    //½«temp´ÓÆäËùÔÚÁ´±íµ±Ç°Î»ÖÃÒÆ³ı
+        insertToList(ptail, temp);  //½«temp²åÈëµ½pheadÁ´±í½áÎ²
 
 
         ptail = ptail->next;
@@ -183,34 +183,34 @@ ln_t link_select_sort(ln_t head)
 
     free(head);
 
-    time(&end);   //è®°å½•ç¨‹åºè¿è¡Œç»“æŸæ—¶é—´
+    time(&end);   //¼ÇÂ¼³ÌĞòÔËĞĞ½áÊøÊ±¼ä
 
-    printf("link_select_sort have spend %d s\n", (int)difftime(end,start)); //æ‰“å°æ•´ä¸ªå‡½æ•°è¿è¡Œæ—¶é—´
+    printf("link_select_sort have spend %d s\n", (int)difftime(end,start)); //´òÓ¡Õû¸öº¯ÊıÔËĞĞÊ±¼ä
 
     return phead;
 }
 
 /*
-    å‡½æ•°åï¼šlink_getComVal
-    å‡½æ•°åŠŸèƒ½ï¼šè·å¾—ç”¨äºå¿«é€Ÿæ’åºçš„åŸºå‡†æ•°ä½ç½®
-    å‚æ•°ï¼šè¦è·å–åŸºå‡†æ•°çš„é“¾è¡¨éƒ¨åˆ†çš„å¤´ head å’Œå°¾ tail
-    è¿”å›å€¼ï¼šå……å½“åŸºå‡†æ•°çš„èŠ‚ç‚¹ä½ç½®
+    º¯ÊıÃû£ºlink_getComVal
+    º¯Êı¹¦ÄÜ£º»ñµÃÓÃÓÚ¿ìËÙÅÅĞòµÄ»ù×¼ÊıÎ»ÖÃ
+    ²ÎÊı£ºÒª»ñÈ¡»ù×¼ÊıµÄÁ´±í²¿·ÖµÄÍ· head ºÍÎ² tail
+    ·µ»ØÖµ£º³äµ±»ù×¼ÊıµÄ½ÚµãÎ»ÖÃ
 */
 ln_t link_getComVal(ln_t head, ln_t tail)
 {
-    //é€‰å–headä½œä¸ºåŸºå‡†æ•°
+    //Ñ¡È¡head×÷Îª»ù×¼Êı
 
-    //ä¸¤ä¸ªç§»åŠ¨æ–¹å‘ç›¸åŒçš„æŒ‡é’ˆ
+    //Á½¸öÒÆ¶¯·½ÏòÏàÍ¬µÄÖ¸Õë
     ln_t phead = head;
     ln_t pnode = phead->next;
 
-    //æŒ‡é’ˆpnodeå‘åç§»åŠ¨ï¼Œå½“pnodeçš„å€¼å°äºåŸºå‡†æ•°æ—¶ï¼Œpheadå‘åç§»åŠ¨ä¸€æ¬¡ï¼Œäº¤æ¢pheadå’Œpnodeçš„å€¼ï¼Œç›´åˆ°pnodeç§»åŠ¨åˆ°äº†tailçš„ä½ç½®
+    //Ö¸ÕëpnodeÏòºóÒÆ¶¯£¬µ±pnodeµÄÖµĞ¡ÓÚ»ù×¼ÊıÊ±£¬pheadÏòºóÒÆ¶¯Ò»´Î£¬½»»»pheadºÍpnodeµÄÖµ£¬Ö±µ½pnodeÒÆ¶¯µ½ÁËtailµÄÎ»ÖÃ
     while(1)
     {
         if(pnode->data.linkid < head->data.linkid)
         {
             phead = phead->next;
-            link_swap_node(phead, pnode);   //äº¤æ¢pheadå’Œpnodeçš„å€¼
+            link_swap_node(phead, pnode);   //½»»»pheadºÍpnodeµÄÖµ
         }
         if(pnode == tail)
         {
@@ -219,7 +219,7 @@ ln_t link_getComVal(ln_t head, ln_t tail)
         pnode = pnode->next;
     }
 
-    link_swap_node(phead, head);    //äº¤æ¢åŸºå‡†æ•°å’Œpheadçš„å€¼
+    link_swap_node(phead, head);    //½»»»»ù×¼ÊıºÍpheadµÄÖµ
 
     pnode = NULL;
 
@@ -227,24 +227,24 @@ ln_t link_getComVal(ln_t head, ln_t tail)
 }
 
 /*
-    å‡½æ•°åï¼šlink_fast_sort
-    å‡½æ•°åŠŸèƒ½ï¼šå•å‘é“¾è¡¨çš„å¿«é€Ÿæ’åº(ä»å°åˆ°å¤§)
-    å‚æ•°ï¼šè¦æ’åºé“¾è¡¨çš„é¦–å…ƒç´  headï¼Œå°¾èŠ‚ç‚¹ tail
-    è¿”å›å€¼ï¼šæ— 
+    º¯ÊıÃû£ºlink_fast_sort
+    º¯Êı¹¦ÄÜ£ºµ¥ÏòÁ´±íµÄ¿ìËÙÅÅĞò(´ÓĞ¡µ½´ó)
+    ²ÎÊı£ºÒªÅÅĞòÁ´±íµÄÊ×ÔªËØ head£¬Î²½Úµã tail
+    ·µ»ØÖµ£ºÎŞ
 */
 void link_fast_sort(ln_t head, ln_t tail)
 {
-    //ç®—æ³•æ€è·¯ï¼š
-    //é€‰å–é“¾è¡¨é¦–å…ƒç´ ä½œä¸ºåŸºå‡†æ•°ï¼Œä¸¤ä¸ªæŒ‡é’ˆpheadå’Œpnodeä¸€å‰ä¸€åéƒ½ä»é“¾è¡¨å¤´éƒ¨å¼€å§‹å‘åç§»åŠ¨ï¼Œ
-    //å…ˆç§»åŠ¨pnodeï¼Œå¦‚æœpnodeçš„å€¼æ¯”åŸºå‡†æ•°å°ï¼Œåˆ™pheadå‘åç§»åŠ¨ä¸€æ¬¡ï¼Œäº¤æ¢pheadå’Œpnodeçš„å€¼ï¼Œç›´åˆ°pnodeç§»åŠ¨åˆ°é“¾è¡¨å°¾ï¼Œ
-    //ç„¶åäº¤æ¢åŸºå‡†æ•°(é¦–å…ƒç´ )å’Œpheadçš„ä½ç½®ï¼Œ
-    //è¿™æ ·ä¸€ä¸ªè¿‡ç¨‹ä¿è¯äº†åŸºå‡†æ•°å‰æ‰€æœ‰å…ƒç´ éƒ½æ¯”åŸºå‡†æ•°å°ï¼ŒåŸºå‡†æ•°åæ‰€æœ‰å…ƒç´ éƒ½æ¯”åŸºå‡†æ•°å¤§
-    //ç„¶ååŸºå‡†æ•°ä¸¤è¾¹è¿›è¡Œå­é—®é¢˜é€’å½’ï¼Œå³å®Œæˆäº†æ’åº
+    //Ëã·¨Ë¼Â·£º
+    //Ñ¡È¡Á´±íÊ×ÔªËØ×÷Îª»ù×¼Êı£¬Á½¸öÖ¸ÕëpheadºÍpnodeÒ»Ç°Ò»ºó¶¼´ÓÁ´±íÍ·²¿¿ªÊ¼ÏòºóÒÆ¶¯£¬
+    //ÏÈÒÆ¶¯pnode£¬Èç¹ûpnodeµÄÖµ±È»ù×¼ÊıĞ¡£¬ÔòpheadÏòºóÒÆ¶¯Ò»´Î£¬½»»»pheadºÍpnodeµÄÖµ£¬Ö±µ½pnodeÒÆ¶¯µ½Á´±íÎ²£¬
+    //È»ºó½»»»»ù×¼Êı(Ê×ÔªËØ)ºÍpheadµÄÎ»ÖÃ£¬
+    //ÕâÑùÒ»¸ö¹ı³Ì±£Ö¤ÁË»ù×¼ÊıÇ°ËùÓĞÔªËØ¶¼±È»ù×¼ÊıĞ¡£¬»ù×¼ÊıºóËùÓĞÔªËØ¶¼±È»ù×¼Êı´ó
+    //È»ºó»ù×¼ÊıÁ½±ß½øĞĞ×ÓÎÊÌâµİ¹é£¬¼´Íê³ÉÁËÅÅĞò
 
     if(head != tail)
     {
-        ln_t comVal = link_getComVal(head, tail);   //è·å–åŸºå‡†æ•°ä½ç½®
-        link_fast_sort(head, comVal);   //åŸºå‡†æ•°å‰çš„éƒ¨åˆ†è¿›è¡Œå­é—®é¢˜é€’å½’
-        link_fast_sort(comVal->next, tail);   //åŸºå‡†æ•°åçš„éƒ¨åˆ†è¿›è¡Œå­é—®é¢˜é€’å½’
+        ln_t comVal = link_getComVal(head, tail);   //»ñÈ¡»ù×¼ÊıÎ»ÖÃ
+        link_fast_sort(head, comVal);   //»ù×¼ÊıÇ°µÄ²¿·Ö½øĞĞ×ÓÎÊÌâµİ¹é
+        link_fast_sort(comVal->next, tail);   //»ù×¼ÊıºóµÄ²¿·Ö½øĞĞ×ÓÎÊÌâµİ¹é
     }
 }

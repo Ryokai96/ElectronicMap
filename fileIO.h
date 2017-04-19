@@ -3,8 +3,8 @@
 
 #include "header.h"
 
-void readFile(md_t n, FILE* fl);    //ä»æ–‡ä»¶ä¸­è¯»å–ä¸€æ¡æ•°æ®
-void writeFile(md_t n, FILE* fl);   //å†™å…¥ä¸€æ¡æ•°æ®åˆ°æ–‡ä»¶ä¸­
+void readFile(md_t n, FILE* fl);    //´ÓÎÄ¼şÖĞ¶ÁÈ¡Ò»ÌõÊı¾İ
+void writeFile(md_t n, FILE* fl);   //Ğ´ÈëÒ»ÌõÊı¾İµ½ÎÄ¼şÖĞ
 
 
 #endif // FILEIO_H

@@ -1,6 +1,6 @@
 /*
-	鏂囦欢鍚嶏細treeOp.c
-	鎻忚堪锛氱敤浜庡鏌ユ壘鏍戠殑鎿嶄綔
+	文件名：treeOp.c
+	描述：用于对查找树的操作
 */
 
 #include "treeOp.h"

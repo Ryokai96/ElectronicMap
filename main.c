@@ -1,7 +1,6 @@
-#include "header.h"
 #include "fileIO.h"
 #include "linkOp.h"
-
+#include "menu.h"
 
 int main(void)
 {
@@ -22,13 +21,13 @@ int main(void)
     tail_l = head_l;
     ln_t node;
 
-//    FILE* fp;   //ç”¨äºŽè®°å½•æ–‡ä»¶å°¾éƒ¨çš„ä½ç½®
-//    fseek(fl_GTBL, 0, 2);   //æŠŠæ–‡ä»¶å†…éƒ¨æŒ‡é’ˆç§»åŠ¨åˆ°æ–‡ä»¶å°¾éƒ¨
-//    fp = (FILE*)ftell(fl_GTBL);    //è®°å½•æ–‡ä»¶å°¾éƒ¨çš„ä½ç½®ï¼Œftellè¿”å›žå€¼ç±»åž‹ä¸ºlongï¼Œè¿›è¡Œå¼ºåˆ¶ç±»åž‹è½¬æ¢é¿å…äº§ç”Ÿè­¦å‘Š
-//    fseek(fl_GTBL, 0, 0);   //æŠŠæ–‡ä»¶å†…éƒ¨æŒ‡é’ˆç§»åŠ¨åˆ°æ–‡ä»¶å¤´éƒ¨
+//    FILE* fp;   //ÓÃÓÚ¼ÇÂ¼ÎÄ¼þÎ²²¿µÄÎ»ÖÃ
+//    fseek(fl_GTBL, 0, 2);   //°ÑÎÄ¼þÄÚ²¿Ö¸ÕëÒÆ¶¯µ½ÎÄ¼þÎ²²¿
+//    fp = (FILE*)ftell(fl_GTBL);    //¼ÇÂ¼ÎÄ¼þÎ²²¿µÄÎ»ÖÃ£¬ftell·µ»ØÖµÀàÐÍÎªlong£¬½øÐÐÇ¿ÖÆÀàÐÍ×ª»»±ÜÃâ²úÉú¾¯¸æ
+//    fseek(fl_GTBL, 0, 0);   //°ÑÎÄ¼þÄÚ²¿Ö¸ÕëÒÆ¶¯µ½ÎÄ¼þÍ·²¿
 
-//    int i = 0;  //ç”¨äºŽè®°å½•é“¾è¡¨é•¿åº¦
-//    while(fp != (FILE*)ftell(fl_GTBL)) //å½“æ–‡ä»¶å†…éƒ¨æŒ‡é’ˆåˆ°äº†æ–‡ä»¶å°¾éƒ¨ï¼Œåˆ™ç»“æŸå¾ªçŽ¯
+//    int i = 0;  //ÓÃÓÚ¼ÇÂ¼Á´±í³¤¶È
+//    while(fp != (FILE*)ftell(fl_GTBL)) //µ±ÎÄ¼þÄÚ²¿Ö¸Õëµ½ÁËÎÄ¼þÎ²²¿£¬Ôò½áÊøÑ­»·
 //    {
 //        node = (ln_t)malloc(sizeof(linkn_t));
 //        readFile(&node->data, fl_GTBL);
@@ -50,22 +49,18 @@ int main(void)
         j++;
     }
 
-
-//    tail_l = link_insert_sort(head_l);
-//    tail_l = link_bubble_sort(head_l);
-//    tail_l = link_select_sort(head_l);
-//    tail_l = tail_l->next;
-    link_fast_sort(head_l->next, tail_l);
-    tail_l = head_l->next;
-    if(tail_l == NULL)
+    ln_t phead, pnode;
+    phead = link_sortSelect(head_l, tail_l);
+    if(phead == NULL)
     {
-        printf("sort error\n");
+        printf("back success\n");
         exit(0);
     }
-    while (tail_l != NULL)
+    pnode = phead->next;
+    while (pnode != NULL)
     {
-        printf("%ld\n", tail_l->data.linkid);
-        tail_l = tail_l->next;
+        printf("%ld\n", pnode->data.linkid);
+        pnode = pnode->next;
     }
     //writeFile(&n, fl_SOURCELINK);
     fclose(fl_GTBL);

@@ -1,15 +1,15 @@
 /*
-	æ–‡ä»¶åï¼šfileIO.c
-	æè¿°ï¼šç”¨äºŽå¯¹æ–‡ä»¶çš„æ“ä½œï¼ŒåŒ…æ‹¬è¯»å–ã€å†™å…¥
+	ÎÄ¼þÃû£ºfileIO.c
+	ÃèÊö£ºÓÃÓÚ¶ÔÎÄ¼þµÄ²Ù×÷£¬°üÀ¨¶ÁÈ¡¡¢Ð´Èë
 */
 
 #include "fileIO.h"
 
 /*
-    å‡½æ•°åï¼šreadFile
-    å‡½æ•°åŠŸèƒ½ï¼šä»Žæ–‡ä»¶ä¸­è¯»å–ä¸€æ¡æ•°æ®
-    å‚æ•°ï¼šè¦è¯»å…¥çš„å¯¹è±¡ nï¼Œè¦è¯»å–çš„æ–‡ä»¶æŒ‡é’ˆ fl
-    è¿”å›žå€¼ï¼šæ— 
+    º¯ÊýÃû£ºreadFile
+    º¯Êý¹¦ÄÜ£º´ÓÎÄ¼þÖÐ¶ÁÈ¡Ò»ÌõÊý¾Ý
+    ²ÎÊý£ºÒª¶ÁÈëµÄ¶ÔÏó n£¬Òª¶ÁÈ¡µÄÎÄ¼þÖ¸Õë fl
+    ·µ»ØÖµ£ºÎÞ
 */
 void readFile(md_t n, FILE* fl)
 {
@@ -68,10 +68,10 @@ void readFile(md_t n, FILE* fl)
 }
 
 /*
-    å‡½æ•°åï¼šwriteFile
-    å‡½æ•°åŠŸèƒ½ï¼šå†™å…¥ä¸€æ¡æ•°æ®åˆ°æ–‡ä»¶ä¸­
-    å‚æ•°ï¼šè¦å†™å‡ºçš„å¯¹è±¡ nï¼Œè¦å†™å…¥çš„æ–‡ä»¶æŒ‡é’ˆ fl
-    è¿”å›žå€¼ï¼šæ— 
+    º¯ÊýÃû£ºwriteFile
+    º¯Êý¹¦ÄÜ£ºÐ´ÈëÒ»ÌõÊý¾Ýµ½ÎÄ¼þÖÐ
+    ²ÎÊý£ºÒªÐ´³öµÄ¶ÔÏó n£¬ÒªÐ´ÈëµÄÎÄ¼þÖ¸Õë fl
+    ·µ»ØÖµ£ºÎÞ
 */
 void writeFile(md_t n, FILE* fl)
 {

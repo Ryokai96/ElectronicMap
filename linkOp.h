@@ -8,17 +8,17 @@ typedef struct linknode {
     struct linknode* next;
 } linkn_t, *ln_t;
 
-ln_t listInit();    //åˆå§‹åŒ–é“¾è¡¨
-void insertToList(ln_t pnode, ln_t n);          //æ’å…¥é“¾è¡¨
-void unloadNode(ln_t pnode, ln_t n);            //å°†é“¾è¡¨æŒ‡å®šèŠ‚ç‚¹ä»å…¶å½“å‰ä½ç½®ç§»é™¤ï¼Œä½†ä¸é‡Šæ”¾è¯¥èŠ‚ç‚¹
-void link_copy_data(ln_t tag, ln_t src);        //å¤åˆ¶ä¸€ä¸ªèŠ‚ç‚¹çš„dataåˆ°å¦ä¸€ä¸ªèŠ‚ç‚¹çš„data
-void link_swap_node(ln_t fnode, ln_t snode);    //äº¤æ¢ä¸¤ä¸ªèŠ‚ç‚¹çš„data
-int link_empty(ln_t head);  //åˆ¤è¯»é“¾è¡¨æ˜¯å¦ä¸ºç©º
+ln_t listInit();    //³õÊ¼»¯Á´±í
+void insertToList(ln_t pnode, ln_t n);          //²åÈëÁ´±í
+void unloadNode(ln_t pnode, ln_t n);            //½«Á´±íÖ¸¶¨½Úµã´ÓÆäµ±Ç°Î»ÖÃÒÆ³ı£¬µ«²»ÊÍ·Å¸Ã½Úµã
+void link_copy_data(ln_t tag, ln_t src);        //¸´ÖÆÒ»¸ö½ÚµãµÄdataµ½ÁíÒ»¸ö½ÚµãµÄdata
+void link_swap_node(ln_t fnode, ln_t snode);    //½»»»Á½¸ö½ÚµãµÄdata
+int link_empty(ln_t head);  //ÅĞ¶ÁÁ´±íÊÇ·ñÎª¿Õ
 
-ln_t link_insert_sort(ln_t head);	//å•å‘é“¾è¡¨çš„æ’å…¥æ’åº(ä»å°åˆ°å¤§)
-ln_t link_bubble_sort(ln_t head);   //å•å‘é“¾è¡¨çš„å†’æ³¡æ’åº(ä»å°åˆ°å¤§)
-ln_t link_select_sort(ln_t head);   //å•å‘é“¾è¡¨çš„é€‰æ‹©æ’åº(ä»å°åˆ°å¤§)
-ln_t link_getComVal(ln_t head, ln_t tail);  //è·å¾—ç”¨äºå¿«é€Ÿæ’åºçš„åŸºå‡†æ•°ä½ç½®
-void link_fast_sort(ln_t head, ln_t tail);  //å•å‘é“¾è¡¨çš„å¿«é€Ÿæ’åº(ä»å°åˆ°å¤§)
+ln_t link_insert_sort(ln_t head);	//µ¥ÏòÁ´±íµÄ²åÈëÅÅĞò(´ÓĞ¡µ½´ó)
+ln_t link_bubble_sort(ln_t head);   //µ¥ÏòÁ´±íµÄÃ°ÅİÅÅĞò(´ÓĞ¡µ½´ó)
+ln_t link_select_sort(ln_t head);   //µ¥ÏòÁ´±íµÄÑ¡ÔñÅÅĞò(´ÓĞ¡µ½´ó)
+ln_t link_getComVal(ln_t head, ln_t tail);  //»ñµÃÓÃÓÚ¿ìËÙÅÅĞòµÄ»ù×¼ÊıÎ»ÖÃ
+void link_fast_sort(ln_t head, ln_t tail);  //µ¥ÏòÁ´±íµÄ¿ìËÙÅÅĞò(´ÓĞ¡µ½´ó)
 
 #endif // LINKOP_H
