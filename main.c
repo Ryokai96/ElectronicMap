@@ -2,12 +2,6 @@
 #include "fileIO.h"
 #include "linkOp.h"
 
-void delay(int ms)
-{
-	int i, j;
-	for (i = 0; i < ms; i++)
-		for (j = 0; j < 535; j++);
-}
 
 int main(void)
 {
@@ -28,30 +22,55 @@ int main(void)
     tail_l = head_l;
     ln_t node;
 
-    FILE* fp;   //用于记录文件尾部的位置
-    fseek(fl_GTBL, 0, 2);   //把文件内部指针移动到文件尾部
-    fp = ftell(fl_GTBL);    //记录文件尾部的位置
-    fseek(fl_GTBL, 0, 0);   //把文件内部指针移动到文件头部
+//    FILE* fp;   //用于记录文件尾部的位置
+//    fseek(fl_GTBL, 0, 2);   //把文件内部指针移动到文件尾部
+//    fp = (FILE*)ftell(fl_GTBL);    //记录文件尾部的位置，ftell返回值类型为long，进行强制类型转换避免产生警告
+//    fseek(fl_GTBL, 0, 0);   //把文件内部指针移动到文件头部
 
-    while(fp != ftell(fl_GTBL)) //当文件内部指针到了文件尾部，则结束循环
+//    int i = 0;  //用于记录链表长度
+//    while(fp != (FILE*)ftell(fl_GTBL)) //当文件内部指针到了文件尾部，则结束循环
+//    {
+//        node = (ln_t)malloc(sizeof(linkn_t));
+//        readFile(&node->data, fl_GTBL);
+//        tail_l->next = node;
+//        tail_l = node;
+//        tail_l->next = NULL;
+//        i++;
+//    }
+
+    int i = 0;
+    int j = 0;
+    for(i = 0; i < 10; i++)
     {
         node = (ln_t)malloc(sizeof(linkn_t));
         readFile(&node->data, fl_GTBL);
         tail_l->next = node;
-        tail_l = node;
+        tail_l = tail_l->next;
         tail_l->next = NULL;
+        j++;
     }
-	delay(2000);
-	head_l = insert_sort(head_l);
-	tail_l = head_l->next;
-	while (tail_l != NULL)
-	{
-		printf("%ld\n", tail_l->data.linkid);
-	}
+
+
+//    tail_l = link_insert_sort(head_l);
+//    tail_l = link_bubble_sort(head_l);
+//    tail_l = link_select_sort(head_l);
+//    tail_l = tail_l->next;
+    link_fast_sort(head_l->next, tail_l);
+    tail_l = head_l->next;
+    if(tail_l == NULL)
+    {
+        printf("sort error\n");
+        exit(0);
+    }
+    while (tail_l != NULL)
+    {
+        printf("%ld\n", tail_l->data.linkid);
+        tail_l = tail_l->next;
+    }
     //writeFile(&n, fl_SOURCELINK);
     fclose(fl_GTBL);
     //fclose(fl_SOURCELINK);
-    free(fp);
+
     getchar();
     return 0;
 }
