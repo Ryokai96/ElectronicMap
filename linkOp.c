@@ -14,8 +14,52 @@
 ln_t listInit()
 {
     ln_t head = (ln_t)malloc(sizeof(linkn_t));
+    mapDataInit(&head->data);   //初始化head->data的值
     head->next = NULL;
     return head;
+}
+
+/*
+    函数名：createLinklist
+    函数功能：创建链表
+    参数：二进制文件地址 src
+    返回值：无
+*/
+void createLinklist(FILE* fl, ln_t* head, ln_t* tail)
+{
+    (*head) = listInit(); //链表初始化
+    (*tail) = (*head);
+
+    FILE* fp;   //用于记录文件尾部的位置
+    fseek(fl, 0, 2);   //把文件内部指针移动到文件尾部
+    fp = (FILE*)ftell(fl);    //记录文件尾部的位置，ftell返回值类型为long，进行强制类型转换避免产生警告
+    fseek(fl, 0, 0);   //把文件内部指针移动到文件头部
+
+    ln_t node;  //用于新建节点
+    int i = 0;  //用于记录链表长度
+    while(fp != (FILE*)ftell(fl)) //当文件内部指针到了文件尾部，则结束循环
+    {
+        node = (ln_t)malloc(sizeof(linkn_t));
+        getMapData(&node->data, fl);
+        (*tail)->next = node;
+        (*tail) = (*tail)->next;
+        (*tail)->next = NULL;
+        i++;
+    }
+
+//    int i = 0;
+//    int j = 0;
+//    for(i = 0; i < 6; i++)
+//    {
+//        node = (ln_t)malloc(sizeof(linkn_t));
+//        getMapData(&node->data, fl);
+//        (*tail)->next = node;
+//        (*tail) = (*tail)->next;
+//        (*tail)->next = NULL;
+//        j++;
+//    }
+
+    fp = NULL;
 }
 
 /*
@@ -58,8 +102,9 @@ void unloadNode(ln_t pnode, ln_t n)
 */
 void link_copy_data(ln_t tag, ln_t src)
 {
+    if(tag->data.roadname !=NULL)
+        free(tag->data.roadname);   //先free掉目标节点的data中roadname所指向内存
     tag->data = src->data;
-    free(tag->data.roadname);   //先free掉目标节点的data中roadname所指向内存
     tag->data.roadname = (UCHAR *)malloc(sizeof(UCHAR) * src->data.roadnamesize);
     strcpy((char*)tag->data.roadname, (char*)src->data.roadname);
 }
@@ -73,6 +118,8 @@ void link_copy_data(ln_t tag, ln_t src)
 void link_swap_node(ln_t fnode, ln_t snode)
 {
     linkn_t temp;
+    mapDataInit(&temp); //初始化temp的值
+
     link_copy_data(&temp, fnode);
     link_copy_data(fnode, snode);
     link_copy_data(snode, &temp);
@@ -102,4 +149,85 @@ int link_empty(ln_t head)
     }
 }
 
+/*
+    函数名：link_num
+    函数功能：返回链表的节点总数(不包括头结点)
+    参数：链表头结点 head
+    返回值：链表的节点总数(不包括头结点)
+*/
+int link_num(ln_t head)
+{
+    if(head->next == NULL)
+    {
+        return 0;
+    }
 
+    int num = 0;
+    ln_t node = head->next;
+    while(node != NULL)
+    {
+        num++;
+        node = node->next;
+    }
+
+    return num;
+}
+
+/*
+    函数名：expLink
+    函数功能：将整张链表输出到二进制文件
+    参数：链表头结点 head
+    返回值：无
+*/
+void expLink(ln_t head)
+{
+
+}
+
+/*
+    函数名：showLink
+    函数功能：将整张链表输出文本文件
+    参数：链表头结点 head，文件指针 fl
+    返回值：无
+*/
+void showLink(ln_t head, FILE* fl)
+{
+    if(link_empty(head))
+    {
+        printf("empty linklist, can't show to txt\n");
+        return ;
+    }
+
+    ln_t pnode = head->next;
+    while (pnode != NULL)
+    {
+        printfFile(&pnode->data, fl);
+        pnode = pnode->next;
+    }
+}
+
+/*
+    函数名：printLink
+    函数功能：将整张链表打印到控制台
+    参数：链表头结点 head
+    返回值：无
+*/
+void printLink(ln_t head)
+{
+    ln_t node = head->next;
+    if(node == NULL)
+    {
+        printf("empty linklist can't print\n");
+        return ;
+    }
+    while(node != NULL)
+    {
+        printf("#linkid=%ld;", node->data.linkid);
+        printf("roadnameflag=%hd;", get_roadnameflag(node->data.node));
+        printf("brunch=%hd;", get_brunch(node->data.node));
+        printf("dispclass=%hd;", get_dispclass(node->data.node));
+        printf("roadname=%s", node->data.roadname);
+        printf("\n");
+        node = node->next;
+    }
+}

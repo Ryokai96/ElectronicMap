@@ -13,16 +13,13 @@
 */
 ln_t link_insert_sort(ln_t head)
 {
-    time_t start, end;  //记录程序运行时间
-    start = time(NULL); //记录程序运行开始时间
+    if(link_empty(head))    //判空
+    {
+        return head;
+    }
 
 	ln_t node = head->next;	//node表示当前作比较的节点
-	ln_t phead = NULL;	//phead为排好序的链表的头节点
-	if (node == NULL)
-	{
-		printf("empty linklist\n");
-		return NULL;
-	}
+    ln_t phead = NULL;	//phead为排好序的链表的头节点
 
 	phead = listInit();	//初始化链表
 
@@ -65,10 +62,6 @@ ln_t link_insert_sort(ln_t head)
 
     free(head);
 
-    end = time(NULL);   //记录程序运行结束时间
-
-    printf("link_insert_sort have spend %d s\n", (int)difftime(end,start)); //打印整个函数运行时间
-
 	return phead;
 }
 
@@ -80,13 +73,9 @@ ln_t link_insert_sort(ln_t head)
 */
 ln_t link_bubble_sort(ln_t head)
 {
-    time_t start, end;  //记录程序运行时间
-    start = time(NULL); //记录程序运行开始时间
-
-    if(head->next == NULL)
+    if(link_empty(head))
     {
-        printf("empty linklist\n");
-        return NULL;
+        return head;
     }
 
     ln_t node = head->next;
@@ -114,9 +103,6 @@ ln_t link_bubble_sort(ln_t head)
     outl = NULL;
     inl = NULL;
 
-    end = time(NULL);   //记录程序运行结束时间
-
-    printf("link_bubble_sort have spend %d s\n", (int)difftime(end,start)); //打印整个函数运行时间
 
     return head;
 }
@@ -129,12 +115,9 @@ ln_t link_bubble_sort(ln_t head)
 */
 ln_t link_select_sort(ln_t head)
 {
-    time_t start, end;  //记录程序运行时间
-    time(&start); //记录程序运行开始时间
-
-    if(link_empty(head) == 1)
+    if(link_empty(head))
     {
-        return NULL;
+        return head;
     }
 
     ln_t phead; //phead用于存放排序好的链表的头结点
@@ -183,10 +166,6 @@ ln_t link_select_sort(ln_t head)
 
     free(head);
 
-    time(&end);   //记录程序运行结束时间
-
-    printf("link_select_sort have spend %d s\n", (int)difftime(end,start)); //打印整个函数运行时间
-
     return phead;
 }
 
@@ -201,8 +180,11 @@ ln_t link_getComVal(ln_t head, ln_t tail)
     //选取head作为基准数
 
     //两个移动方向相同的指针
+    if(head == NULL)
+        return head;
     ln_t phead = head;
     ln_t pnode = phead->next;
+
 
     //指针pnode向后移动，当pnode的值小于基准数时，phead向后移动一次，交换phead和pnode的值，直到pnode移动到了tail的位置
     while(1)
@@ -210,7 +192,10 @@ ln_t link_getComVal(ln_t head, ln_t tail)
         if(pnode->data.linkid < head->data.linkid)
         {
             phead = phead->next;
-            link_swap_node(phead, pnode);   //交换phead和pnode的值
+            if(phead != pnode)  //如果phead和pnode没有重合
+            {
+                link_swap_node(phead, pnode);   //交换phead和pnode的值
+            }
         }
         if(pnode == tail)
         {
@@ -244,7 +229,10 @@ void link_fast_sort(ln_t head, ln_t tail)
     if(head != tail)
     {
         ln_t comVal = link_getComVal(head, tail);   //获取基准数位置
+        if(comVal == NULL)
+            return ;
         link_fast_sort(head, comVal);   //基准数前的部分进行子问题递归
         link_fast_sort(comVal->next, tail);   //基准数后的部分进行子问题递归
+        comVal = NULL;
     }
 }

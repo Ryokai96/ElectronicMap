@@ -5,52 +5,28 @@
 int main(void)
 {
     FILE* fl_GTBL;
-//    FILE* fl_SOURCELINK;
+
+    FILE* fl_SOURCELINK;
+
     if((fl_GTBL = fopen(GTBL_PATH,"rb+")) == NULL)
     {
         printf("GTBL open error!\n");
         exit(1);
     }
-//    if((fl_SOURCELINK = fopen(SOURCELINK_PATH,"at+")) == NULL)
-//    {
-//        printf("SOURCELINK open error!\n");
-//        exit(1);
-//    }
-    ln_t tail_l;
-    ln_t head_l = listInit();
-    tail_l = head_l;
-    ln_t node;
 
-//    FILE* fp;   //用于记录文件尾部的位置
-//    fseek(fl_GTBL, 0, 2);   //把文件内部指针移动到文件尾部
-//    fp = (FILE*)ftell(fl_GTBL);    //记录文件尾部的位置，ftell返回值类型为long，进行强制类型转换避免产生警告
-//    fseek(fl_GTBL, 0, 0);   //把文件内部指针移动到文件头部
-
-//    int i = 0;  //用于记录链表长度
-//    while(fp != (FILE*)ftell(fl_GTBL)) //当文件内部指针到了文件尾部，则结束循环
-//    {
-//        node = (ln_t)malloc(sizeof(linkn_t));
-//        readFile(&node->data, fl_GTBL);
-//        tail_l->next = node;
-//        tail_l = node;
-//        tail_l->next = NULL;
-//        i++;
-//    }
-
-    int i = 0;
-    int j = 0;
-    for(i = 0; i < 10; i++)
+    if((fl_SOURCELINK = fopen(SOURCELINK_PATH,"wt+")) == NULL)
     {
-        node = (ln_t)malloc(sizeof(linkn_t));
-        readFile(&node->data, fl_GTBL);
-        tail_l->next = node;
-        tail_l = tail_l->next;
-        tail_l->next = NULL;
-        j++;
+        printf("SOURCELINK open error!\n");
+        exit(1);
     }
 
+
+    ln_t head = NULL;
+    ln_t tail = NULL;
+    createLinklist(fl_GTBL, &head, &tail);
+
     ln_t phead, pnode;
-    phead = link_sortSelect(head_l, tail_l);
+    phead = link_sortSelect(head, tail);
     if(phead == NULL)
     {
         printf("back success\n");
@@ -59,12 +35,13 @@ int main(void)
     pnode = phead->next;
     while (pnode != NULL)
     {
-        printf("%ld\n", pnode->data.linkid);
+        printfFile(&pnode->data, fl_SOURCELINK);
         pnode = pnode->next;
     }
     //writeFile(&n, fl_SOURCELINK);
+    link_searchSelect(head);
     fclose(fl_GTBL);
-    //fclose(fl_SOURCELINK);
+    fclose(fl_SOURCELINK);
 
     getchar();
     return 0;
