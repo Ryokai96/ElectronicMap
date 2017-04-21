@@ -1,6 +1,6 @@
 /*
 	文件名：linkseq.c
-    描述：单向链表的排序，包括插入排序、冒泡排序、选择排序、快速排序
+    描述：单向链表的排序，包括插入排序、冒泡排序、选择排序、快速排序，对排序结果进行相应操作的函数也包括在内
 */
 
 #include "linkOp.h"
@@ -235,4 +235,31 @@ void link_fast_sort(ln_t head, ln_t tail)
         link_fast_sort(comVal->next, tail);   //基准数后的部分进行子问题递归
         comVal = NULL;
     }
+}
+
+/*
+    函数名：exp_seq_result
+    函数功能：输出排序的结果到二进制文件 SortGTBL.dat
+    参数：查找结果链表的头结点 head
+    返回值：无
+*/
+void exp_seq_result(ln_t head)
+{
+    if(link_empty(head))
+    {
+        return ;
+    }
+
+    FILE* fl;
+    if((fl = fopen(SORTGTBL_PATH,"wt+")) == NULL)
+    {
+        printf("searchresult.txt open error!\n");
+        exit(1);
+    }
+
+    expLink(head, fl);
+
+    fclose(fl);
+
+    fl = NULL;
 }

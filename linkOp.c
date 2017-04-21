@@ -1,6 +1,6 @@
 /*
 	文件名：linkOp.c
-	描述：用于对单向链表的操作，包括单向链表的初始化、插入
+    描述：用于对单向链表的操作，包括单向链表的初始化、创建、判空、计算节点总数、输出，节点的插入、移除、复制、交换
 */
 
 #include "linkOp.h"
@@ -14,6 +14,7 @@
 ln_t listInit()
 {
     ln_t head = (ln_t)malloc(sizeof(linkn_t));
+    memset(head, 0, sizeof(linkn_t));  //清空数据
     mapDataInit(&head->data);   //初始化head->data的值
     head->next = NULL;
     return head;
@@ -22,7 +23,7 @@ ln_t listInit()
 /*
     函数名：createLinklist
     函数功能：创建链表
-    参数：二进制文件地址 src
+    参数：需读取文件的文件指针 fl， 链表头结点 head，尾指针 tail
     返回值：无
 */
 void createLinklist(FILE* fl, ln_t* head, ln_t* tail)
@@ -36,7 +37,6 @@ void createLinklist(FILE* fl, ln_t* head, ln_t* tail)
     fseek(fl, 0, 0);   //把文件内部指针移动到文件头部
 
     ln_t node;  //用于新建节点
-    int i = 0;  //用于记录链表长度
     while(fp != (FILE*)ftell(fl)) //当文件内部指针到了文件尾部，则结束循环
     {
         node = (ln_t)malloc(sizeof(linkn_t));
@@ -44,7 +44,6 @@ void createLinklist(FILE* fl, ln_t* head, ln_t* tail)
         (*tail)->next = node;
         (*tail) = (*tail)->next;
         (*tail)->next = NULL;
-        i++;
     }
 
 //    int i = 0;
@@ -102,11 +101,7 @@ void unloadNode(ln_t pnode, ln_t n)
 */
 void link_copy_data(ln_t tag, ln_t src)
 {
-    if(tag->data.roadname !=NULL)
-        free(tag->data.roadname);   //先free掉目标节点的data中roadname所指向内存
-    tag->data = src->data;
-    tag->data.roadname = (UCHAR *)malloc(sizeof(UCHAR) * src->data.roadnamesize);
-    strcpy((char*)tag->data.roadname, (char*)src->data.roadname);
+    copyMapData(&tag->data, &src->data);
 }
 
 /*
@@ -118,7 +113,8 @@ void link_copy_data(ln_t tag, ln_t src)
 void link_swap_node(ln_t fnode, ln_t snode)
 {
     linkn_t temp;
-    mapDataInit(&temp); //初始化temp的值
+    mapDataInit(&(temp.data)); //初始化temp的data的值
+    temp.next = NULL;
 
     link_copy_data(&temp, fnode);
     link_copy_data(fnode, snode);
@@ -176,12 +172,23 @@ int link_num(ln_t head)
 /*
     函数名：expLink
     函数功能：将整张链表输出到二进制文件
-    参数：链表头结点 head
+    参数：链表头结点 head, 文件指针 fl
     返回值：无
 */
-void expLink(ln_t head)
+void expLink(ln_t head, FILE* fl)
 {
+    if(link_empty(head))
+    {
+        printf("empty linklist, can't export to SortGTBL.dat\n");
+        return ;
+    }
 
+    ln_t pnode = head->next;
+    while (pnode != NULL)
+    {
+        writeMapData(&pnode->data, fl);
+        pnode = pnode->next;
+    }
 }
 
 /*
@@ -194,14 +201,14 @@ void showLink(ln_t head, FILE* fl)
 {
     if(link_empty(head))
     {
-        printf("empty linklist, can't show to txt\n");
+        printf("empty linklist, can't show to sourcelink.txt\n");
         return ;
     }
 
     ln_t pnode = head->next;
     while (pnode != NULL)
     {
-        printfFile(&pnode->data, fl);
+        printMapData(&pnode->data, fl);
         pnode = pnode->next;
     }
 }

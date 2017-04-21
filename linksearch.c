@@ -1,6 +1,6 @@
 /*
     文件名：linksearch.c
-    描述：用于对单向链表的查找操作，可对linkid、dispclass、brunch、roadname进行查找
+    描述：用于对单向链表的查找操作，可对linkid、dispclass、brunch、roadname进行查找，对查找结果进行相应操作的函数也包括在内
 */
 
 #include "linkOp.h"
@@ -42,7 +42,9 @@ ln_t link_search_linkID(ln_t head, UINT linkID)
 
     if(link_num(head) == 0)
     {
+        printf("对查找到的结果快速排序中...\n");
         link_fast_sort(phead->next, ptail);   //对找到的节点进行快速排序
+        printf("排序完成\n");
     }
 
     return phead;
@@ -85,7 +87,9 @@ ln_t link_search_dispclass(ln_t head, UINT dispclass)
 
     if(link_num(head) == 0)
     {
+        printf("对查找到的结果快速排序中...\n");
         link_fast_sort(phead->next, ptail);   //对找到的节点进行快速排序
+        printf("排序完成\n");
     }
 
     return phead;
@@ -128,7 +132,9 @@ ln_t link_search_brunch(ln_t head, UINT brunch)
 
     if(link_num(head) == 0)
     {
+        printf("对查找到的结果快速排序中...\n");
         link_fast_sort(phead->next, ptail);   //对找到的节点进行快速排序
+        printf("排序完成\n");
     }
 
     return phead;
@@ -171,14 +177,13 @@ ln_t link_search_roadname(ln_t head, char* roadname)
 
     if(link_num(head) == 0)
     {
+        printf("对查找到的结果快速排序中...\n");
         link_fast_sort(phead->next, ptail);   //对找到的节点进行快速排序
+        printf("排序完成\n");
     }
 
     return phead;
 }
-
-
-int NFILE = 0;  //用于记录创建了几次searchresult.txt
 
 /*
     函数名：exp_search_result
@@ -205,10 +210,14 @@ void exp_search_result(ln_t head)
         char filename[20] = "searchresult"; //文件名
         strcat(filename, fileNameLen);
         strcat(filename, ".txt");
-        char* filePath = (char*)malloc(strlen(FILE_PATH) + strlen(filename) + 1);
-        memset(filePath, 0, sizeof(filePath));
+        char* filePath = (char*)malloc(strlen(FILE_PATH) + strlen(filename) + 1);   //文件路径
+        memset(filePath, 0, strlen(FILE_PATH) + strlen(filename) + 1);  //清空字符串
         strcat(filePath, FILE_PATH);
         strcat(filePath, filename);
+
+        printf("***************************************************************************\n");
+        printf("\b\b结果大于5条，将其转存到文本文件%s\n", filename);
+        printf("***************************************************************************\n");
 
         if((fl = fopen(filePath,"wt+")) == NULL)
         {

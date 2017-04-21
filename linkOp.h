@@ -17,7 +17,7 @@ void link_copy_data(ln_t tag, ln_t src);        //复制一个节点的data到另一个节点
 void link_swap_node(ln_t fnode, ln_t snode);    //交换两个节点的data
 int link_empty(ln_t head);  //判读链表是否为空
 int link_num(ln_t head);    //返回链表的节点总数(不包括头结点)
-void expLink(ln_t head);    //将整张链表输出到二进制文件
+void expLink(ln_t head, FILE *fl);    //将整张链表输出到二进制文件
 void showLink(ln_t head, FILE* fl); //将整张链表输出文本文件
 void printLink(ln_t head);  //将整张链表打印到控制台
 
@@ -27,6 +27,7 @@ ln_t link_bubble_sort(ln_t head);   //单向链表的冒泡排序(从小到大)
 ln_t link_select_sort(ln_t head);   //单向链表的选择排序(从小到大)
 ln_t link_getComVal(ln_t head, ln_t tail);  //获得用于快速排序的基准数位置
 void link_fast_sort(ln_t head, ln_t tail);  //单向链表的快速排序(从小到大)
+void exp_seq_result(ln_t head); //输出排序的结果到二进制文件 SortGTBL.dat
 
 //linksearch.c中函数
 ln_t link_search_linkID(ln_t head, UINT linkID);    //按linkid查找数据，并将找到的数据保存到查找结果链表中

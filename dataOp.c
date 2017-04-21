@@ -1,5 +1,9 @@
-#include "header.h"
-#include "fileIO.h"
+/*
+    文件名：dataOp.c
+    描述：用于对mapdata结构体的操作，包括初始化mapdata结构体、mapdata结构体数据传递相关操作、node数据的解析
+*/
+
+#include "fileOp.h"
 
 /*
     函数名：mapDataInit
@@ -25,6 +29,45 @@ void mapDataInit(md_t temp)
 void getMapData(md_t n, FILE* fl)
 {
     readFile(n, fl);
+}
+
+/*
+    函数名：writeMapData
+    函数功能：将一条mapdata结构体类型数据以二进制形式写入文件
+    参数：用于存储数据的结构体指针 n，文件指针fl
+    返回值：无
+*/
+void writeMapData(md_t n, FILE* fl)
+{
+    writeFile(n, fl);
+}
+
+/*
+    函数名：copyMapData
+    函数功能：拷贝src的值到dec
+    参数：目标结构体指针 dec，拷贝结构体指针 sec
+    返回值：无
+*/
+void copyMapData(md_t dec, md_t src)
+{
+    dec->size = src->size;
+    dec->linkid = src->linkid;
+    dec->node = src->node;
+    dec->roadnamesize = src->roadnamesize;
+    free(dec->roadname);
+    dec->roadname = (UCHAR*)malloc(sizeof(UCHAR) * src->roadnamesize);
+    strcpy(dec->roadname, src->roadname);
+}
+
+/*
+    函数名：printMapData
+    函数功能：将一条mapdata结构体类型数据以文本形式写入文件
+    参数：用于存储数据的结构体指针 n，文件指针fl
+    返回值：无
+*/
+void printMapData(md_t n, FILE* fl)
+{
+    printfFile(n, fl);
 }
 
 /*
