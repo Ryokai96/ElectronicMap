@@ -208,7 +208,7 @@ void showLink(ln_t head, FILE* fl)
     ln_t pnode = head->next;
     while (pnode != NULL)
     {
-        printMapData(&pnode->data, fl);
+        showMapData(&pnode->data, fl);
         pnode = pnode->next;
     }
 }
@@ -229,12 +229,7 @@ void printLink(ln_t head)
     }
     while(node != NULL)
     {
-        printf("#linkid=%ld;", node->data.linkid);
-        printf("roadnameflag=%hd;", get_roadnameflag(node->data.node));
-        printf("brunch=%hd;", get_brunch(node->data.node));
-        printf("dispclass=%hd;", get_dispclass(node->data.node));
-        printf("roadname=%s", node->data.roadname);
-        printf("\n");
+        printMapData(&(node->data));    //打印一条数据到控制台
         node = node->next;
     }
 }

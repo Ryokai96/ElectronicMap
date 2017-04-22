@@ -56,18 +56,34 @@ void copyMapData(md_t dec, md_t src)
     dec->roadnamesize = src->roadnamesize;
     free(dec->roadname);
     dec->roadname = (UCHAR*)malloc(sizeof(UCHAR) * src->roadnamesize);
-    strcpy(dec->roadname, src->roadname);
+    strcpy((char*)(dec->roadname), (char*)(src->roadname));
 }
 
 /*
-    函数名：printMapData
+    函数名：showMapData
     函数功能：将一条mapdata结构体类型数据以文本形式写入文件
     参数：用于存储数据的结构体指针 n，文件指针fl
     返回值：无
 */
-void printMapData(md_t n, FILE* fl)
+void showMapData(md_t n, FILE* fl)
 {
     printfFile(n, fl);
+}
+
+/*
+    函数名：printMapData
+    函数功能：将一条mapdata结构体类型数据打印到控制台
+    参数：用于存储数据的结构体指针 n
+    返回值：无
+*/
+void printMapData(md_t n)
+{
+    printf("#linkid=%ld;", n->linkid);
+    printf("roadnameflag=%hd;", get_roadnameflag(n->node));
+    printf("brunch=%hd;", get_brunch(n->node));
+    printf("dispclass=%hd;", get_dispclass(n->node));
+    printf("roadname=%s", n->roadname);
+    printf("\n");
 }
 
 /*

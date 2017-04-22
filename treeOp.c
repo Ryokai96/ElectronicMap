@@ -37,12 +37,12 @@ void createTree(FILE* fl, tn_t top)
     fseek(fl, 0, 0);   //把文件内部指针移动到文件头部
 
     mapd_t data;
-    mapDataInit(data);  //初始化data的值
+    mapDataInit(&data);  //初始化data的值
 
     while(fp != (FILE*)ftell(fl))
     {
         getMapData(&data, fl);
-        insert_to_tree(top);
+        insert_to_tree(top, data);
     }
 
     fp = NULL;
@@ -89,15 +89,37 @@ void tree_num(tn_t top, int* num)
     {
         return ;
     }
-
-    tn_t node = top;
-
     else
     {
+        tn_t node = top;
         (*num)++;
         node = node->lchild;
         tree_num(node, num);
         node = node->rchile;
         tree_num(node, num);
+    }
+}
+
+/*
+    函数名：print_tree
+    函数功能：在控制台打印出二叉查找树的所有节点
+    参数：顶端节点 top
+    返回值：无
+*/
+void print_tree(tn_t top)
+{
+    if(top == NULL)
+    {
+        printf("empty tree\n");
+        return ;
+    }
+    else
+    {
+        tn_t node = top;
+        printMapData(&(node->data));    //将一条mapdata结构体类型数据打印到控制台
+        node = node->lchild;
+        print_tree(node);
+        node = node->rchile;
+        print_tree(node);
     }
 }
