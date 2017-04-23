@@ -7,7 +7,6 @@ SOURCES += main.c \
     linkOp.c \
     linkseq.c \
     treeOp.c \
-    treeseq.c \
     linksearch.c \
     menu.c \
     fileOp.c \

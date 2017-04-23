@@ -250,16 +250,23 @@ void exp_seq_result(ln_t head)
         return ;
     }
 
-    FILE* fl;
-    if((fl = fopen(SORTGTBL_PATH,"wt+")) == NULL)
+    FILE* fl;   //SortGTBL.dat的文件指针
+    if((fl = fopen(SORTGTBL_PATH,"wb+")) == NULL)
     {
-        printf("searchresult.txt open error!\n");
+        printf("SortGTBL.dat open error!\n");
         exit(1);
     }
-
     expLink(head, fl);
-
     fclose(fl);
+
+    FILE* fp;   //sourcelink.txt的文件指针
+    if((fp = fopen(SOURCELINK_PATH,"wt+")) == NULL)
+    {
+        printf("sourcelink.txt open error!\n");
+        exit(1);
+    }
+    showLink(head, fp);
+    fclose(fp);
 
     fl = NULL;
 }

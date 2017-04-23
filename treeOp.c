@@ -104,19 +104,19 @@ bool tree_num(tn_t top, int* num)
 }
 
 /*
-    函数名：print_tree
-    函数功能：中序遍历，在控制台打印出二叉查找树的所有节点
-    参数：顶端节点 top
+    函数名：expLink
+    函数功能：中序遍历，按linkid从小到大把树的内容写入到二进制文件SortGTBL.dat
+    参数：顶端节点 top，文件指针fl
     返回值：该分支是否遍历结束，true代表结束，false代表未结束
 */
-bool print_tree(tn_t top)
+bool expTree(tn_t top, FILE* fl)
 {
     if(top != NULL)
     {
-        if(print_tree(top->lchild) == true)
+        if(showTree(top->lchild, fl) == true)
         {
-            printMapData(&(top->data));    //将一条mapdata结构体类型数据打印到控制台
-            if(print_tree(top->rchile) == true)
+            writeMapData(&(top->data), fl);
+            if(showTree(top->rchile, fl) == true)
             {
                 return true;
             }
@@ -143,6 +143,32 @@ bool showTree(tn_t top, FILE* fl)
         {
             showMapData(&(top->data), fl);
             if(showTree(top->rchile, fl) == true)
+            {
+                return true;
+            }
+        }
+        return false;
+    }
+    else
+    {
+        return true;
+    }
+}
+
+/*
+    函数名：print_tree
+    函数功能：中序遍历，在控制台打印出二叉查找树的所有节点
+    参数：顶端节点 top
+    返回值：该分支是否遍历结束，true代表结束，false代表未结束
+*/
+bool print_tree(tn_t top)
+{
+    if(top != NULL)
+    {
+        if(print_tree(top->lchild) == true)
+        {
+            printMapData(&(top->data));    //将一条mapdata结构体类型数据打印到控制台
+            if(print_tree(top->rchile) == true)
             {
                 return true;
             }
