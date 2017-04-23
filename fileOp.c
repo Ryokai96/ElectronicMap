@@ -13,6 +13,8 @@
 */
 void readFile(md_t n, FILE* fl)
 {
+    static int j = 0;
+    j++;
     //临时保存读取到的数据
     UINT i = 0;
     UINT size = 0;
@@ -24,35 +26,35 @@ void readFile(md_t n, FILE* fl)
     if((fread(&size, sizeof(UINT), 1, fl)) != 1)
     {
         printf("read size error!\n");
-        exit(0);
+        return ;
     }
     n->size = MC_GET_SHORT(&size);
 
     if((fread(&linkid, sizeof(ULONG), 1, fl)) != 1)
     {
         printf("read linkid error!\n");
-        exit(0);
+        return ;
     }
     n->linkid = MC_GET_LONG(&linkid);
 
     if((fread(&roadnamesize, sizeof(UINT), 1, fl)) != 1)
     {
         printf("read roadnamesize error!\n");
-        exit(0);
+        return ;
     }
     n->roadnamesize = n->size - 12;
 
     if((fread(&node, sizeof(ULONG), 1, fl)) != 1)
     {
         printf("read node error!\n");
-        exit(0);
+        return ;
     }
     n->node = MC_GET_LONG(&node);
 
     if((fread(roadname, sizeof(UCHAR), n->roadnamesize, fl)) != n->roadnamesize)
     {
         printf("read roadname error!\n");
-        exit(0);
+        return ;
     }
     for(i = 0; i < n->roadnamesize; i++)
     {
@@ -80,39 +82,43 @@ void writeFile(md_t n, FILE* fl)
     ULONG linkid = MC_GET_LONG(&(n->linkid));
     UINT roadnamesize = MC_GET_SHORT(&(n->roadnamesize));
     ULONG node = MC_GET_LONG(&(n->node));
-    UCHAR roadname[30] = "１＝";
-    strcat((char*)roadname, (char*)n->roadname);
-
-    int i = 0;
-    for(i = 0; i < n->roadnamesize; i++)
-    {
-        roadname[i] = MC_GET_CHAR(&roadname[i]);
-    }
 
     if((fwrite(&size, sizeof(UINT), 1, fl)) != 1)
     {
-        printf("read size error!\n");
-        exit(0);
+        printf("write size error!\n");
+        return ;
     }
     if((fwrite(&linkid, sizeof(ULONG), 1, fl)) != 1)
     {
-        printf("read linkid error!\n");
-        exit(0);
+        printf("write linkid error!\n");
+        return ;
     }
     if((fwrite(&roadnamesize, sizeof(UINT), 1, fl)) != 1)
     {
-        printf("read roadnamesize error!\n");
-        exit(0);
+        printf("write roadnamesize error!\n");
+        return ;
     }
     if((fwrite(&node, sizeof(ULONG), 1, fl)) != 1)
     {
-        printf("read node error!\n");
-        exit(0);
+        printf("write node error!\n");
+        return ;
     }
-    if((fwrite(roadname, sizeof(UCHAR), n->roadnamesize, fl)) != n->roadnamesize)
+
+    if(n->roadnamesize != 0)
     {
-        printf("read roadname error!\n");
-        exit(0);
+        UCHAR roadname[30] = "１＝";
+        strcat((char*)roadname, (char*)n->roadname);
+        int i = 0;
+        for(i = 0; i < n->roadnamesize; i++)
+        {
+            roadname[i] = MC_GET_CHAR(&roadname[i]);
+        }
+        if((fwrite(roadname, sizeof(UCHAR), n->roadnamesize, fl)) != n->roadnamesize)
+        {
+            printf("write roadname error!\n");
+            return ;
+        }
+
     }
 }
 
@@ -140,6 +146,7 @@ void printfFile(md_t n, FILE* fl)
 */
 void removeAllFile()
 {
+    printf("delete scratch file...\n");
     DIR* dir;
     struct dirent* ptr;
     dir = opendir(FILE_PATH); //打开data目录
@@ -178,4 +185,6 @@ void removeAllFile()
     dpath = NULL;
     ddpath = NULL;
     file_list = NULL;
+
+    printf("delete complete\n");
 }

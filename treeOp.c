@@ -1,6 +1,6 @@
 /*
 	文件名：treeOp.c
-    描述：用于对查找树的操作，包括节点的初始化
+    描述：用于对查找树的操作，包括节点的初始化，创建树，插入节点到二叉查找树，返回树的节点数，在控制台打印出树，将数输出到文本文件
 */
 
 #include "treeOp.h"
@@ -29,7 +29,7 @@ tn_t treeInit()
     参数：需读取文件的文件指针 fl， 二叉树顶部节点 top
     返回值：无
 */
-void createTree(FILE* fl, tn_t top)
+void createTree(FILE* fl, tn_t* top)
 {
     FILE* fp;   //用于记录文件尾部的位置
     fseek(fl, 0, 2);   //把文件内部指针移动到文件尾部
@@ -54,72 +54,103 @@ void createTree(FILE* fl, tn_t top)
     参数：顶端节点 top， 数据 data
     返回值：data中linkid和当前节点中的data中的linkid的大小比较的结果
 */
-bool insert_to_tree(tn_t top, mapd_t data)
+bool insert_to_tree(tn_t* top, mapd_t data)
 {
-    tn_t node = top;
-    if(node == NULL)
+    tn_t* node = top;
+    if((*node) == NULL)
     {
-        node = treeInit();
-        copyMapData(&node->data, &data); //将data拷贝给top->data
+        (*node) = treeInit();
+        copyMapData(&((*node)->data), &data); //将data拷贝给top->data
         return true;    //c99中true的值其实就是1
     }
 
-    if(node->data.linkid == data.linkid) //二叉查找树不能用相同的值
+    if((*node)->data.linkid == data.linkid) //二叉查找树不能用相同的值
     {
         return false;
     }
 
-    if(node->data.linkid > data.linkid)
+    if((*node)->data.linkid > data.linkid)
     {
-        return insert_to_tree(node->lchild, data);
+        return insert_to_tree(&((*node)->lchild), data);
     }
 
-    return insert_to_tree(node->rchile, data);
+    return insert_to_tree(&((*node)->rchile), data);
 }
 
 /*
     函数名：tree_num
-    函数功能：获得二叉查找树的节点数
+    函数功能：先序遍历获得二叉查找树的节点数
     参数：顶端节点 top， 用于保存节点数的 num
-    返回值：无
+    返回值：该分支是否遍历结束，true代表结束，false代表未结束
 */
-void tree_num(tn_t top, int* num)
+bool tree_num(tn_t top, int* num)
 {
-    if(top == NULL)
+    if(top != NULL)
     {
-        return ;
+        (*num)++;
+        if(tree_num(top->lchild, num) == true)
+        {
+            if(tree_num(top->rchile, num) == true)
+            {
+                return true;
+            }
+        }
+        return false;
     }
     else
     {
-        tn_t node = top;
-        (*num)++;
-        node = node->lchild;
-        tree_num(node, num);
-        node = node->rchile;
-        tree_num(node, num);
+        return true;
     }
 }
 
 /*
     函数名：print_tree
-    函数功能：在控制台打印出二叉查找树的所有节点
+    函数功能：中序遍历，在控制台打印出二叉查找树的所有节点
     参数：顶端节点 top
-    返回值：无
+    返回值：该分支是否遍历结束，true代表结束，false代表未结束
 */
-void print_tree(tn_t top)
+bool print_tree(tn_t top)
 {
-    if(top == NULL)
+    if(top != NULL)
     {
-        printf("empty tree\n");
-        return ;
+        if(print_tree(top->lchild) == true)
+        {
+            printMapData(&(top->data));    //将一条mapdata结构体类型数据打印到控制台
+            if(print_tree(top->rchile) == true)
+            {
+                return true;
+            }
+        }
+        return false;
     }
     else
     {
-        tn_t node = top;
-        printMapData(&(node->data));    //将一条mapdata结构体类型数据打印到控制台
-        node = node->lchild;
-        print_tree(node);
-        node = node->rchile;
-        print_tree(node);
+        return true;
+    }
+}
+
+/*
+    函数名：showTree
+    函数功能：中序遍历，按linkid从小到大把树的内容写入到文本文件sourcelink.txt中
+    参数：顶端节点 top，文件指针fl
+    返回值：该分支是否遍历结束，true代表结束，false代表未结束
+*/
+bool showTree(tn_t top, FILE* fl)
+{
+    if(top != NULL)
+    {
+        if(showTree(top->lchild, fl) == true)
+        {
+            showMapData(&(top->data), fl);
+            if(showTree(top->rchile, fl) == true)
+            {
+                return true;
+            }
+        }
+        return false;
+    }
+    else
+    {
+        return true;
     }
 }
