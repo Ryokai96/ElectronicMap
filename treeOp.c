@@ -1,6 +1,7 @@
 /*
 	文件名：treeOp.c
     描述：用于对查找树的操作，包括节点的初始化，创建树，插入节点到二叉查找树，返回树的节点数，在控制台打印出树，将数输出到文本文件
+    用有序的数据构建二叉查找树时，二叉查找树会退化成链表，用递归方法创建二叉查找树，并在递归中使用malloc的话，会出现栈空间不够用而产生段错误
 */
 
 #include "treeOp.h"
@@ -13,10 +14,7 @@
 */
 tn_t treeInit()
 {
-    static int n = 0;
-    n++;
-   // int size = sizeof(treen_t);
-    tn_t tTreeNode = (tn_t) malloc(sizeof(treen_t));
+    tn_t tTreeNode = (tn_t)malloc(sizeof(treen_t));
     if(tTreeNode == NULL)
         printf("malloc error\n");
     memset(tTreeNode, 0, sizeof(treen_t));  //清空数据
@@ -43,7 +41,8 @@ void createTree(FILE* fl, tn_t* top)
     mapd_t data;
     mapDataInit(&data);  //初始化data的值
 
-    while(fp != (FILE*)ftell(fl))
+    int i = 0;
+    while((fp != (FILE*)ftell(fl)) && i++<30000)
     {
         getMapData(&data, fl);
         insert_to_tree(top, data);

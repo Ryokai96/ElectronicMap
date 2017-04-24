@@ -18,7 +18,7 @@ int main(void)
 //    int num = 0;
 //    tree_num(top, &num);
 //    printf("%d\n", num);
-////    print_tree(top);
+//    print_tree(top);
 
 //    FILE* fp = NULL;
 //    if((fp = fopen(SOURCELINK_PATH, "wt+")) == NULL)

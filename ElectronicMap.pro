@@ -23,3 +23,6 @@ HEADERS += \
 
 DISTFILES += \
     DATA/GTBL.dat
+
+OTHER_FILES += \
+    DATA/GTBL.dat

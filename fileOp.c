@@ -139,6 +139,30 @@ void printfFile(md_t n, FILE* fl)
 }
 
 /*
+    函数名：copyFile
+    函数功能：copy一个二进制文件到另一个二进制文件
+    参数：要copy的源二进制文件指针 fl，目标文件指针 fp
+    返回值：无
+*/
+void copyFile(FILE* fl, FILE* fp)
+{
+    FILE* ff;   //用于记录文件尾部的位置
+    fseek(fl, 0, 2);   //把文件内部指针移动到文件尾部
+    ff = (FILE*)ftell(fl);    //记录文件尾部的位置，ftell返回值类型为long，进行强制类型转换避免产生警告
+    fseek(fl, 0, 0);   //把文件内部指针移动到文件头部
+
+    mapd_t n;  //用于临时存储读到的数据
+    mapDataInit(&n);
+    while(ff != (FILE*)ftell(fl)) //当文件内部指针到了文件尾部，则结束循环
+    {
+        readFile(&n, fl);
+        writeFile(&n, fp);
+    }
+
+    ff = NULL;
+}
+
+/*
     函数名：removeAllFile
     函数功能：删除除GTBL外当前data目录下所有文件
     参数：无

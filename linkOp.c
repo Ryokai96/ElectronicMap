@@ -258,7 +258,7 @@ void link_deleteSomeNode(ln_t head, ln_t phead)
 
     ln_t pnode = phead->next;
 
-    while(node != NULL)
+    while(pnode != NULL)
     {
         if((node->data.linkid) == (pnode->data.linkid)) //通过linkid匹配是否要删除该节点
         {

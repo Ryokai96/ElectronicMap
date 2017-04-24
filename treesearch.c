@@ -48,5 +48,5 @@ void exp_tree_search_result(tn_t top)
         printf("the data is non-existent\n");
         return ;
     }
-    print_tree(top);
+    printMapData(&(top->data));
 }
