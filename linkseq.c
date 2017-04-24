@@ -238,12 +238,12 @@ void link_fast_sort(ln_t head, ln_t tail)
 }
 
 /*
-    函数名：exp_seq_result
+    函数名：exp_link_seq_result
     函数功能：输出排序的结果到二进制文件 SortGTBL.dat
     参数：查找结果链表的头结点 head
     返回值：无
 */
-void exp_seq_result(ln_t head)
+void exp_link_seq_result(ln_t head)
 {
     if(link_empty(head))
     {
@@ -254,19 +254,19 @@ void exp_seq_result(ln_t head)
     if((fl = fopen(SORTGTBL_PATH,"wb+")) == NULL)
     {
         printf("SortGTBL.dat open error!\n");
-        exit(1);
+        return ;
     }
     expLink(head, fl);
     fclose(fl);
+    fl = NULL;
 
     FILE* fp;   //sourcelink.txt的文件指针
     if((fp = fopen(SOURCELINK_PATH,"wt+")) == NULL)
     {
         printf("sourcelink.txt open error!\n");
-        exit(1);
+        return ;
     }
     showLink(head, fp);
     fclose(fp);
-
-    fl = NULL;
+    fp = NULL;
 }

@@ -14,11 +14,12 @@
 tn_t treeInit()
 {
     tn_t tTreeNode = (tn_t) malloc(sizeof(treen_t));
+    if(tTreeNode == NULL)
+        printf("malloc error\n");
     memset(tTreeNode, 0, sizeof(treen_t));  //清空数据
     mapDataInit(&(tTreeNode->data));    //初始化tTreeNode的data
-    tTreeNode->parent = NULL;
     tTreeNode->lchild = NULL;
-    tTreeNode->rchile = NULL;
+    tTreeNode->rchild = NULL;
 
     return tTreeNode;
 }
@@ -61,11 +62,13 @@ bool insert_to_tree(tn_t* top, mapd_t data)
     {
         (*node) = treeInit();
         copyMapData(&((*node)->data), &data); //将data拷贝给top->data
+        node = NULL;
         return true;    //c99中true的值其实就是1
     }
 
     if((*node)->data.linkid == data.linkid) //二叉查找树不能用相同的值
     {
+        node = NULL;
         return false;
     }
 
@@ -74,7 +77,7 @@ bool insert_to_tree(tn_t* top, mapd_t data)
         return insert_to_tree(&((*node)->lchild), data);
     }
 
-    return insert_to_tree(&((*node)->rchile), data);
+    return insert_to_tree(&((*node)->rchild), data);
 }
 
 /*
@@ -90,7 +93,7 @@ bool tree_num(tn_t top, int* num)
         (*num)++;
         if(tree_num(top->lchild, num) == true)
         {
-            if(tree_num(top->rchile, num) == true)
+            if(tree_num(top->rchild, num) == true)
             {
                 return true;
             }
@@ -113,10 +116,10 @@ bool expTree(tn_t top, FILE* fl)
 {
     if(top != NULL)
     {
-        if(showTree(top->lchild, fl) == true)
+        if(expTree(top->lchild, fl) == true)
         {
             writeMapData(&(top->data), fl);
-            if(showTree(top->rchile, fl) == true)
+            if(expTree(top->rchild, fl) == true)
             {
                 return true;
             }
@@ -142,7 +145,7 @@ bool showTree(tn_t top, FILE* fl)
         if(showTree(top->lchild, fl) == true)
         {
             showMapData(&(top->data), fl);
-            if(showTree(top->rchile, fl) == true)
+            if(showTree(top->rchild, fl) == true)
             {
                 return true;
             }
@@ -168,7 +171,7 @@ bool print_tree(tn_t top)
         if(print_tree(top->lchild) == true)
         {
             printMapData(&(top->data));    //将一条mapdata结构体类型数据打印到控制台
-            if(print_tree(top->rchile) == true)
+            if(print_tree(top->rchild) == true)
             {
                 return true;
             }

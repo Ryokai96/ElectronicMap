@@ -10,7 +10,9 @@ SOURCES += main.c \
     linksearch.c \
     menu.c \
     fileOp.c \
-    dataOp.c
+    dataOp.c \
+    treeseq.c \
+    treesearch.c
 
 HEADERS += \
     header.h \

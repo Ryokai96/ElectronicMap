@@ -11,7 +11,7 @@
     参数：查找数据的链表的头结点 head，要查找的linkid linkID
     返回值：查找结果链表的头结点
 */
-ln_t link_search_linkID(ln_t head, UINT linkID)
+ln_t link_search_linkID(ln_t head, ULONG linkID)
 {
     if(link_empty(head))
     {
@@ -186,12 +186,12 @@ ln_t link_search_roadname(ln_t head, char* roadname)
 }
 
 /*
-    函数名：exp_search_result
+    函数名：exp_link_search_result
     函数功能：输出检索的结果
     参数：查找结果链表的头结点 head
     返回值：无
 */
-void exp_search_result(ln_t head)
+void exp_link_search_result(ln_t head)
 {
     if(link_num(head) == 0)
     {

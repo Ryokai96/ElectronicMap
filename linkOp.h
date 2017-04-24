@@ -27,13 +27,13 @@ ln_t link_bubble_sort(ln_t head);   //单向链表的冒泡排序(从小到大)
 ln_t link_select_sort(ln_t head);   //单向链表的选择排序(从小到大)
 ln_t link_getComVal(ln_t head, ln_t tail);  //获得用于快速排序的基准数位置
 void link_fast_sort(ln_t head, ln_t tail);  //单向链表的快速排序(从小到大)
-void exp_seq_result(ln_t head); //输出排序的结果到二进制文件 SortGTBL.dat
+void exp_link_seq_result(ln_t head); //输出排序的结果到二进制文件 SortGTBL.dat
 
 //linksearch.c中函数
-ln_t link_search_linkID(ln_t head, UINT linkID);    //按linkid查找数据，并将找到的数据保存到查找结果链表中
+ln_t link_search_linkID(ln_t head, ULONG linkID);    //按linkid查找数据，并将找到的数据保存到查找结果链表中
 ln_t link_search_dispclass(ln_t head, UINT dispclass);  //按交叉link列表示class番号查找数据，并将找到的数据保存到查找结果链表中
 ln_t link_search_brunch(ln_t head, UINT brunch);    //按岔路数brunch查找数据，并将找到的数据保存到查找结果链表中
 ln_t link_search_roadname(ln_t head, char* roadname);  //按道路名称查找数据，并将找到的数据保存到查找结果链表中
-void exp_search_result(ln_t head);  //输出检索的结果
+void exp_link_search_result(ln_t head);  //输出检索的结果
 
 #endif // LINKOP_H

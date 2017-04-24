@@ -111,6 +111,7 @@ void select_menu(int n)
         linklist_menu();
         break;
     case 2:
+        tree_menu();
         break;
     default:
         return ;
@@ -145,6 +146,7 @@ void linklist_menu()
 
     while(n != 0)
     {
+        printf("\n");
         printf("请选择服务的种类：\n");
         printf("\t1.读取文件(\"GTBL.dat\")\n");
         printf("\t2.排序并输出排序结果(\"SortGTBL.dat\")\n");
@@ -249,15 +251,15 @@ void link_sortSelect(ln_t head, ln_t tail)
     printf("\b\b将其转存到二进制文件SortGTBL.dat\n");
     printf("***************************************************************************\n");
 
-    exp_seq_result(phead);  //输出排序结果到二进制文件SortGTBL.dat
+    exp_link_seq_result(phead);  //输出排序结果到二进制文件SortGTBL.dat
 
     phead = NULL;
 }
 
 /*
     函数名：link_searchSelect
-    函数功能：链表排序方式的选择，输出排序结果
-    参数：需排序的链表的头节点 head，尾节点 tail
+    函数功能：链表查找方式的选择，输出查找结果
+    参数：进行查找的链表的头节点 head
     返回值：无
 */
 void link_searchSelect(ln_t head)
@@ -325,8 +327,104 @@ void link_searchSelect(ln_t head)
         }
     }
 
-    exp_search_result(phead);   //输出查找结果
+    exp_link_search_result(phead);   //输出查找结果
 
     phead = NULL;
 }
 
+/*
+    函数名：tree_menu
+    函数功能：二叉查找树存储格式对应菜单
+    参数：无
+    返回值：无
+*/
+void tree_menu()
+{
+    printf("读取文件...\n");
+    FILE* fl;
+    if((fl = fopen(GTBL_PATH,"rb+")) == NULL)
+    {
+        printf("GTBL open error!\n");
+        return ;
+    }
+    tn_t top = NULL;
+    printf("读取中...\n");
+    createTree(fl, &top);
+    fclose(fl);
+    fl = NULL;
+    printf("文件读取成功!\n");
+
+    int n = 5;  //用于记录用户选择的服务种类
+    int m = 0;  //用于记录用户选择的读取文件方式
+
+    while(n != 0)
+    {
+        printf("\n");
+        printf("请选择服务的种类：\n");
+        printf("\t1.读取文件(\"GTBL.dat\")\n");
+        printf("\t2.中序遍历并输出中序遍历结果(按linkid从小到大)到(\"SortGTBL.dat\")\n");
+        printf("\t3.按linkid检索\n");
+        printf("\t4.更新\n");
+        printf("\t0.退出\n");
+        printf("\t请选择：");
+
+        fflush(stdin);
+        scanf("%d", &n);    //输入选择的服务种类
+        fflush(stdin);
+        printf("\n");
+
+        switch(n) {
+        case 1:
+            m = readfile_menu();    //读取文件的方式
+            select_menu(m);    //转到相应的数据结构对应的菜单
+            break;
+        case 2:
+            printf("***************************************************************************\n");
+            printf("\b\b将其转存到二进制文件SortGTBL.dat\n");
+            printf("***************************************************************************\n");
+            exp_tree_seq_result(top);  //输出排序结果到二进制文件SortGTBL.dat
+            break;
+        case 3:
+            tree_searchSelect(top);
+            break;
+        case 4:
+            if(remove(GTBL_PATH) == -1)
+            {
+                printf("remove GTBL.dat error\n");
+            }
+            else if(rename(SORTGTBL_PATH, GTBL_PATH) == -1)
+            {
+                printf("rename SortGTBL.dat error, is SortGTBL.dat exist?\n");
+            }
+            break;
+        case 0:
+            removeAllFile();
+            exit(0);
+        default:
+            printf("\t请输入正确的选项\n");
+        }
+    }
+}
+
+/*
+    函数名：tree_searchSelect
+    函数功能：二叉查找树查找条件的输入，输出查找结果
+    参数：进行查找的树的顶端节点 top
+    返回值：无
+*/
+void tree_searchSelect(tn_t top)
+{
+    tn_t ptop = NULL;  //用于保存查找结果
+    printf("\t请输入 linkID ：");
+    ULONG linkID = 0;
+    fflush(stdin);
+    scanf("%ld", &linkID);    //输入linkID
+    fflush(stdin);
+    printf("\n");
+    ptop = tree_search_linkID(top, linkID);
+
+
+    exp_tree_search_result(ptop);   //输出查找结果
+
+    ptop = NULL;
+}
