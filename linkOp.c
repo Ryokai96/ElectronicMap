@@ -233,3 +233,53 @@ void printLink(ln_t head)
         node = node->next;
     }
 }
+
+/*
+    函数名：link_deleteSomeNode
+    函数功能：将链表中部分节点从链表删除
+    参数：要删除节点的链表头结点 head，需要删除的部分链表节点组成的链表头节点 phead
+    返回值：无
+*/
+void link_deleteSomeNode(ln_t head, ln_t phead)
+{
+    if(link_empty(head))
+    {
+        printf("target linklist empty\n");
+        return ;
+    }
+    if(link_empty(phead))
+    {
+        printf("no linklist node need to delete\n");
+        return ;
+    }
+
+    ln_t tail = head;
+    ln_t node = tail->next;
+
+    ln_t pnode = phead->next;
+
+    while(node != NULL)
+    {
+        if((node->data.linkid) == (pnode->data.linkid)) //通过linkid匹配是否要删除该节点
+        {
+            //将匹配到的节点从head链表删除
+            unloadNode(tail, node);
+            free(node);
+            node = tail->next;
+
+            //将匹配到的节点从phead链表删除
+            unloadNode(phead, pnode);
+            free(pnode);
+            pnode = phead->next;
+        }
+        else
+        {
+            tail = tail->next;
+            node = tail->next;
+        }
+    }
+
+    tail = NULL;
+    node = NULL;
+    pnode = NULL;
+}

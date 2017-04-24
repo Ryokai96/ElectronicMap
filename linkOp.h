@@ -20,6 +20,7 @@ int link_num(ln_t head);    //返回链表的节点总数(不包括头结点)
 void expLink(ln_t head, FILE *fl);    //将整张链表输出到二进制文件
 void showLink(ln_t head, FILE* fl); //将整张链表输出文本文件
 void printLink(ln_t head);  //将整张链表打印到控制台
+void link_deleteSomeNode(ln_t head, ln_t phead);    //将链表中部分节点从链表删除
 
 //linkseq.c中函数
 ln_t link_insert_sort(ln_t head);	//单向链表的插入排序(从小到大)

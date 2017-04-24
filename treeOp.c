@@ -13,6 +13,9 @@
 */
 tn_t treeInit()
 {
+    static int n = 0;
+    n++;
+   // int size = sizeof(treen_t);
     tn_t tTreeNode = (tn_t) malloc(sizeof(treen_t));
     if(tTreeNode == NULL)
         printf("malloc error\n");
