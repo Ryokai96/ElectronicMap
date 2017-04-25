@@ -5,6 +5,7 @@
 #include "fileOp.h"
 #include "linkOp.h"
 #include "treeOp.h"
+#include "rbtreeOp.h"
 
 void primary_menu();    //程序主菜单
 int readfile_menu();    //读取文件菜单
@@ -18,5 +19,7 @@ void link_insertMenu(ln_t *tail); //链表节点插入的菜单
 
 void tree_menu();   //二叉查找树存储格式对应菜单
 void tree_searchSelect(tn_t top);   //二叉查找树查找条件的输入，输出查找结果
+
+void rbtree_menu(); //红黑树存储格式对应菜单
 
 #endif // MENU_H

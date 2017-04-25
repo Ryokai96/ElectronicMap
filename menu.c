@@ -70,6 +70,7 @@ int readfile_menu()
     printf("\t请选择读取文件的方式：\n");
     printf("\t\t1.链表\n");
     printf("\t\t2.二叉查找树\n");
+    printf("\t\t3.红黑树\n");
     printf("\t\t0.返回\n");
     printf("\t请选择：");
 
@@ -87,6 +88,8 @@ int readfile_menu()
             return 1;
         case 2:
             return 2;
+        case 3:
+            return 3;
         case 0:
             return 0;
         default:
@@ -113,6 +116,8 @@ void select_menu(int n)
     case 2:
         tree_menu();
         break;
+    case 3:
+        rbtree_menu();
     default:
         return ;
     }
@@ -616,4 +621,75 @@ void tree_searchSelect(tn_t top)
     exp_tree_search_result(ptop);   //输出查找结果
 
     ptop = NULL;
+}
+
+/*
+    函数名：rbtree_menu
+    函数功能：红黑树存储格式对应菜单
+    参数：无
+    返回值：无
+*/
+void rbtree_menu()
+{
+    printf("读取文件...\n");
+    FILE* fl;
+    if((fl = fopen(GTBL_PATH,"rb+")) == NULL)
+    {
+        printf("GTBL open error!\n");
+        return ;
+    }
+    rbr_t root = (rbr_t)malloc(sizeof(rbroot_t));
+    root->node = NULL;
+    printf("读取中...\n");
+    createRBTree(fl, root);
+    fclose(fl);
+    fl = NULL;
+    printf("文件读取成功!\n");
+
+    int n = 5;  //用于记录用户选择的服务种类
+    int m = 0;  //用于记录用户选择的读取文件方式
+
+    while(n != 0)
+    {
+        printf("\n");
+        printf("请选择服务的种类：\n");
+        printf("\t1.读取文件(\"GTBL.dat\")\n");
+        printf("\t2.中序遍历并输出中序遍历结果(按linkid从小到大)到(\"SortGTBL.dat\")\n");
+        printf("\t3.更新\n");
+        printf("\t0.退出\n");
+        printf("\t请选择：");
+
+        fflush(stdin);
+        scanf("%d", &n);    //输入选择的服务种类
+        fflush(stdin);
+        printf("\n");
+
+        switch(n) {
+        case 1:
+            m = readfile_menu();    //读取文件的方式
+            select_menu(m);    //转到相应的数据结构对应的菜单
+            break;
+        case 2:
+            printf("***************************************************************************\n");
+            printf("\b\b将其转存到二进制文件SortGTBL.dat\n");
+            printf("***************************************************************************\n");
+            exp_rbtree_seq_result(root);  //输出排序结果到二进制文件SortGTBL.dat
+            break;
+        case 3:
+            if(remove(GTBL_PATH) == -1)
+            {
+                printf("remove GTBL.dat error\n");
+            }
+            else if(rename(SORTGTBL_PATH, GTBL_PATH) == -1)
+            {
+                printf("rename SortGTBL.dat error, is SortGTBL.dat exist?\n");
+            }
+            break;
+        case 0:
+            removeAllFile();
+            exit(0);
+        default:
+            printf("\t请输入正确的选项\n");
+        }
+    }
 }

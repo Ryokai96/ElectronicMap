@@ -41,8 +41,7 @@ void createTree(FILE* fl, tn_t* top)
     mapd_t data;
     mapDataInit(&data);  //初始化data的值
 
-    int i = 0;
-    while((fp != (FILE*)ftell(fl)) && i++<30000)
+    while(fp != (FILE*)ftell(fl))
     {
         getMapData(&data, fl);
         insert_to_tree(top, data);
@@ -109,7 +108,7 @@ bool tree_num(tn_t top, int* num)
 }
 
 /*
-    函数名：expLink
+    函数名：expTree
     函数功能：中序遍历，按linkid从小到大把树的内容写入到二进制文件SortGTBL.dat
     参数：顶端节点 top，文件指针fl
     返回值：该分支是否遍历结束，true代表结束，false代表未结束

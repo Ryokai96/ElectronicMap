@@ -12,14 +12,16 @@ SOURCES += main.c \
     fileOp.c \
     dataOp.c \
     treeseq.c \
-    treesearch.c
+    treesearch.c \
+    rbtreeOp.c
 
 HEADERS += \
     header.h \
     linkOp.h \
     treeOp.h \
     menu.h \
-    fileOp.h
+    fileOp.h \
+    rbtreeOp.h
 
 DISTFILES += \
     DATA/GTBL.dat

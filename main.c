@@ -1,35 +1,25 @@
 #include "fileOp.h"
 #include "linkOp.h"
 #include "treeOp.h"
+#include "rbtreeOp.h"
 #include "menu.h"
 
 int main(void)
 {
     primary_menu();
+
 //    FILE* fl = NULL;
-//    tn_t top = NULL;
+//    rbr_t root = (rbr_t)malloc(sizeof(rbroot_t));
+//    root->node = NULL;
 //    if((fl = fopen(GTBL_PATH, "rb+")) == NULL)
 //    {
 //        printf("can't open GTBL.dat\n");
 //        return 0;
 //    }
-//    createTree(fl, &top);
+//    createRBTree(fl, root);
 //    fclose(fl);
-//    int num = 0;
-//    tree_num(top, &num);
-//    printf("%d\n", num);
-//    print_tree(top);
+//    printRBTree(root->node);
 
-//    FILE* fp = NULL;
-//    if((fp = fopen(SOURCELINK_PATH, "wt+")) == NULL)
-//    {
-//        printf("can't open sourcelink.txt\n");
-//        return 0;
-//    }
-//    showTree(top, fl);
-//    fclose(fp);
-//    fp = NULL;
-//    fl = NULL;
     getchar();
     return 0;
 }
