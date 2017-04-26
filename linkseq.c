@@ -239,7 +239,7 @@ void link_fast_sort(ln_t head, ln_t tail)
 
 /*
     函数名：exp_link_seq_result
-    函数功能：输出排序的结果到二进制文件 SortGTBL.dat
+    函数功能：输出排序的结果到二进制文件 SortGTBL.dat和文本文件 sourcelink.txt
     参数：查找结果链表的头结点 head
     返回值：无
 */

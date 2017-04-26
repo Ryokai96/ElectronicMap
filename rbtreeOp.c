@@ -1,6 +1,6 @@
 /*
     文件名：rbtreeOp.c
-    描述：用于对红黑树的操作
+    描述：用于对红黑树的操作，包括初始化红黑树节点，红黑树的左旋、右旋，插入节点，红黑树的插入修复，创建红黑树，中序遍历输出红黑树到二进制文件、文本文件、控制台
 */
 
 #include "rbtreeOp.h"
@@ -339,7 +339,7 @@ void printRBTree(rbtn_t node)
 
 /*
     函数名：exp_rbtree_seq_result
-    函数功能：输出排序的结果到二进制文件 SortGTBL.dat
+    函数功能：输出排序的结果到二进制文件 SortGTBL.dat和文本文件 sourcelink.txt
     参数：查找结果二叉树的顶端节点 top
     返回值：无
 */

@@ -7,7 +7,7 @@
 
 /*
     函数名：exp_tree_seq_result
-    函数功能：输出排序的结果到二进制文件 SortGTBL.dat
+    函数功能：输出排序的结果到二进制文件 SortGTBL.dat和文本文件 sourcelink.txt
     参数：查找结果二叉树的顶端节点 top
     返回值：无
 */
