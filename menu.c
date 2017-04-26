@@ -610,7 +610,9 @@ void tree_searchSelect(tn_t top)
 {
     printf("\t请选择检索的方式：\n");
     printf("\t\t1.指定 linkID 检索\n");
-    printf("\t\t2.指定 道路名称 检索\n");
+    printf("\t\t2.指定 交叉Link列表示Class番号 检索\n");
+    printf("\t\t3.指定 查找岔路数 检索\n");
+    printf("\t\t4.指定 道路名称 检索\n");
     printf("\t\t0.返回\n");
     printf("\t请选择：");
 
@@ -634,13 +636,31 @@ void tree_searchSelect(tn_t top)
             ptop = tree_search_linkID(top, linkID);
             break;
         case 2:
+            printf("\t请输入 交叉Link列表示Class番号 ：");
+            UINT dispclass = 0;
+            fflush(stdin);
+            scanf("%hd", &dispclass);    //输入dispclass
+            fflush(stdin);
+            printf("\n");
+            tree_search_dispclass(top, dispclass, &ptop);
+            break;
+        case 3:
+            printf("\t请输入 Link的Brunch(岔道数)数量 ：");
+            UINT brunch = 0;
+            fflush(stdin);
+            scanf("%hd", &brunch);    //输入brunch
+            fflush(stdin);
+            printf("\n");
+            tree_search_brunch(top, brunch, &ptop);
+            break;
+        case 4:
             printf("\t请输入 道路名称 ：");
             char roadname[30] = "";
             fflush(stdin);
             scanf("%s", roadname);    //输入brunch
             fflush(stdin);
             printf("\n");
-            tree_search_roadname(top, roadname, ptop);
+            tree_search_roadname(top, roadname, &ptop);
             break;
         case 0:
             ptop = NULL;
