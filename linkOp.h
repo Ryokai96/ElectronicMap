@@ -17,6 +17,7 @@ void link_copy_data(ln_t tag, ln_t src);        //复制一个节点的data到另一个节点
 void link_swap_node(ln_t fnode, ln_t snode);    //交换两个节点的data
 int link_empty(ln_t head);  //判读链表是否为空
 int link_num(ln_t head);    //返回链表的节点总数(不包括头结点)
+//ln_t getMiddleNode(ln_t head);  //返回链表的中间节点
 void expLink(ln_t head, FILE *fl);    //将整张链表输出到二进制文件
 void showLink(ln_t head, FILE* fl); //将整张链表输出文本文件
 void printLink(ln_t head);  //将整张链表打印到控制台

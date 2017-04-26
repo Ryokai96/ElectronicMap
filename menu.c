@@ -247,7 +247,7 @@ void link_sortSelect(ln_t head, ln_t tail)
             break;
         case 4:
             start = time(NULL);
-            link_fast_sort(head->next, tail);
+            link_fast_sort(head->next, tail);   //0s
             end = time(NULL);
             break;
         case 0:
@@ -557,7 +557,7 @@ void tree_menu()
         printf("请选择服务的种类：\n");
         printf("\t1.读取文件(\"GTBL.dat\")\n");
         printf("\t2.中序遍历并输出中序遍历结果(按linkid从小到大)到(\"SortGTBL.dat\")\n");
-        printf("\t3.按linkid检索\n");
+        printf("\t3.检索\n");
         printf("\t4.更新\n");
         printf("\t0.退出\n");
         printf("\t请选择：");
@@ -608,15 +608,48 @@ void tree_menu()
 */
 void tree_searchSelect(tn_t top)
 {
-    tn_t ptop = NULL;  //用于保存查找结果
-    printf("\t请输入 linkID ：");
-    ULONG linkID = 0;
-    fflush(stdin);
-    scanf("%ld", &linkID);    //输入linkID
-    fflush(stdin);
-    printf("\n");
-    ptop = tree_search_linkID(top, linkID);
+    printf("\t请选择检索的方式：\n");
+    printf("\t\t1.指定 linkID 检索\n");
+    printf("\t\t2.指定 道路名称 检索\n");
+    printf("\t\t0.返回\n");
+    printf("\t请选择：");
 
+    int n = -1;
+    tn_t ptop = NULL;  //用于保存查找结果
+
+    while(n == -1) {
+        fflush(stdin);
+        scanf("%d", &n);    //输入选择的检索方式
+        fflush(stdin);
+        printf("\n");
+
+        switch(n) {
+        case 1:
+            printf("\t请输入 linkID ：");
+            ULONG linkID = 0;
+            fflush(stdin);
+            scanf("%ld", &linkID);    //输入linkID
+            fflush(stdin);
+            printf("\n");
+            ptop = tree_search_linkID(top, linkID);
+            break;
+        case 2:
+            printf("\t请输入 道路名称 ：");
+            char roadname[30] = "";
+            fflush(stdin);
+            scanf("%s", roadname);    //输入brunch
+            fflush(stdin);
+            printf("\n");
+            tree_search_roadname(top, roadname, ptop);
+            break;
+        case 0:
+            ptop = NULL;
+            return ;
+        default:
+            printf("\t请输入正确的选项\n");
+            n = -1;
+        }
+    }
 
     exp_tree_search_result(ptop);   //输出查找结果
 

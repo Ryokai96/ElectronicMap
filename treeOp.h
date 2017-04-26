@@ -23,6 +23,7 @@ void exp_tree_seq_result(tn_t top); //输出排序的结果到二进制文件 SortGTBL.dat
 
 //treesearch.c中函数声明
 tn_t tree_search_linkID(tn_t top, ULONG linkID);    //按linkid查找数据
+void tree_search_roadname(tn_t top, char* roadname, tn_t ptop); //按roadname查找数据
 void exp_tree_search_result(tn_t top);  //输出检索的结果
 
 #endif

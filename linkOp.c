@@ -169,6 +169,27 @@ int link_num(ln_t head)
     return num;
 }
 
+///*
+//    函数名：getMiddleNode
+//    函数功能：返回链表的中间节点
+//    参数：链表头结点 head
+//    返回值：链表的中间节点
+//*/
+//ln_t getMiddleNode(ln_t head)
+//{
+//    //两个指针都从表头开始向后遍历
+//    ln_t phead = head;
+//    ln_t ptail = head;
+
+//    while(ptail != NULL && ptail->next != NULL)
+//    {
+//        phead = phead->next;
+//        ptail = ptail->next->next;
+//    }
+
+//    return phead;
+//}
+
 /*
     函数名：expLink
     函数功能：将整张链表输出到二进制文件

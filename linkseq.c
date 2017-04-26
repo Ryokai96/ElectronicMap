@@ -177,14 +177,11 @@ ln_t link_select_sort(ln_t head)
 */
 ln_t link_getComVal(ln_t head, ln_t tail)
 {
-    //选取head作为基准数
+    //选取首元素作为基准数
 
     //两个移动方向相同的指针
-    if(head == NULL)
-        return head;
     ln_t phead = head;
     ln_t pnode = phead->next;
-
 
     //指针pnode向后移动，当pnode的值小于基准数时，phead向后移动一次，交换phead和pnode的值，直到pnode移动到了tail的位置
     while(1)
