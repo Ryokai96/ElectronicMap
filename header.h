@@ -26,17 +26,17 @@ typedef struct mapData{
     UCHAR* roadname;
 } mapd_t, *md_t;
 
-//#define FILE_PATH "D:/github/ElectronicMap/DATA/"  //文件夹路径
-//#define GTBL_PATH "D:/github/ElectronicMap/DATA/GTBL.dat"  //GTBL.dat文件路径
-//#define LINKGTBL_PATH "D:/github/ElectronicMap/DATA/LinkGTBL.dat"  //读取成链表后保存的文件文件路径
-//#define SORTGTBL_PATH "D:/github/ElectronicMap/DATA/SortGTBL.dat"  //排序后保存的二进制文件的文件路径
-//#define SOURCELINK_PATH "D:/github/ElectronicMap/DATA/sourcelink.txt"  //排序后保存的文本文件的文件路径
+#define FILE_PATH "D:/github/ElectronicMap/DATA/"  //文件夹路径
+#define GTBL_PATH "D:/github/ElectronicMap/DATA/GTBL.dat"  //GTBL.dat文件路径
+#define LINKGTBL_PATH "D:/github/ElectronicMap/DATA/LinkGTBL.dat"  //读取成链表后保存的文件文件路径
+#define SORTGTBL_PATH "D:/github/ElectronicMap/DATA/SortGTBL.dat"  //排序后保存的二进制文件的文件路径
+#define SOURCELINK_PATH "D:/github/ElectronicMap/DATA/sourcelink.txt"  //排序后保存的文本文件的文件路径
 
-#define FILE_PATH "C:/Users/Ryoukai/Documents/GitHub/ElectronicMap/DATA/"   //文件夹路径
-#define GTBL_PATH "C:/Users/Ryoukai/Documents/GitHub/ElectronicMap/DATA/GTBL.dat"  //GTBL.dat文件路径
-#define LINKGTBL_PATH "C:/Users/Ryoukai/Documents/GitHub/ElectronicMap/DATA/LinkGTBL.dat"  //读取成链表后保存的文件文件路径
-#define SORTGTBL_PATH "C:/Users/Ryoukai/Documents/GitHub/ElectronicMap/DATA/SortGTBL.dat"  //排序后保存的二进制文件的文件路径
-#define SOURCELINK_PATH "C:/Users/Ryoukai/Documents/GitHub/ElectronicMap/DATA/sourcelink.txt"  //排序后保存的文本文件的文件路径
+//#define FILE_PATH "C:/Users/Ryoukai/Documents/GitHub/ElectronicMap/DATA/"   //文件夹路径
+//#define GTBL_PATH "C:/Users/Ryoukai/Documents/GitHub/ElectronicMap/DATA/GTBL.dat"  //GTBL.dat文件路径
+//#define LINKGTBL_PATH "C:/Users/Ryoukai/Documents/GitHub/ElectronicMap/DATA/LinkGTBL.dat"  //读取成链表后保存的文件文件路径
+//#define SORTGTBL_PATH "C:/Users/Ryoukai/Documents/GitHub/ElectronicMap/DATA/SortGTBL.dat"  //排序后保存的二进制文件的文件路径
+//#define SOURCELINK_PATH "C:/Users/Ryoukai/Documents/GitHub/ElectronicMap/DATA/sourcelink.txt"  //排序后保存的文本文件的文件路径
 
 //dataOp中函数声明
 void mapDataInit(md_t temp);    //初始化mapData结构体

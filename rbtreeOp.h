@@ -32,6 +32,7 @@ void createRBTree(FILE* fl, rbr_t root);    //创建红黑树
 void expRBTree(rbtn_t node, FILE* fl);  //中序遍历，按linkid从小到大把树的内容写入到二进制文件SortGTBL.dat
 void showRBTree(rbtn_t node, FILE* fl); //中序遍历，按linkid从小到大把红黑树的内容写入到文本文件sourcelink.txt中
 void printRBTree(rbtn_t node);  //中序遍历红黑树，从小到大输出到控制台
+void destroyRBTree(rbtn_t top); //删除红黑树
 void exp_rbtree_seq_result(rbr_t root); //输出排序的结果到二进制文件 SortGTBL.dat
 
 #endif // RBTREEOP_H

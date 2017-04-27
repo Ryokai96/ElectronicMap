@@ -17,6 +17,7 @@ bool tree_num(tn_t top, int* num);  //先序遍历获得二叉查找树的节点数
 bool expTree(tn_t top, FILE* fl);   //中序遍历，按linkid从小到大把树的内容写入到二进制文件SortGTBL.dat
 bool showTree(tn_t top, FILE* fl);  //中序遍历，按linkid从小到大把树的内容写入到文本文件sourcelink.txt中
 bool print_tree(tn_t top);  //中序遍历，按linkid从小到大在控制台打印出二叉查找树的所有节点
+void destroyTree(tn_t top); //删除二叉查找树
 
 //treeseq.c中函数声明
 void exp_tree_seq_result(tn_t top); //输出排序的结果到二进制文件 SortGTBL.dat

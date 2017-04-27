@@ -304,3 +304,32 @@ void link_deleteSomeNode(ln_t head, ln_t phead)
     node = NULL;
     pnode = NULL;
 }
+
+/*
+    函数名：destroyLink
+    函数功能：删除链表
+    参数：要删除链表的头结点 head
+    返回值：无
+*/
+void destroyLink(ln_t head)
+{
+    if(head == NULL)
+    {
+        printf("head is NULL\n");
+        return ;
+    }
+
+    ln_t pnode = head->next;
+
+    //从头结点后一个一个删除节点
+    while(pnode != NULL)
+    {
+        head->next = pnode->next;
+        free(pnode);
+        pnode = head->next;
+    }
+
+    free(head);
+
+    pnode = NULL;
+}

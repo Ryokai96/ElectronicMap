@@ -25,9 +25,7 @@ void primary_menu()
     {
         printf("请选择服务的种类：\n");
         printf("\t1.读取文件(\"GTBL.dat\")\n");
-        printf("\t2.排序并输出排序结果(\"SortGTBL.dat\")\n");
-        printf("\t3.检索\n");
-        printf("\t4.更新\n");
+        printf("\t2.删除所有排序结果和查找结果\n");
         printf("\t0.退出\n");
         printf("\t请选择：");
 
@@ -42,16 +40,9 @@ void primary_menu()
             select_menu(m);    //转到相应的数据结构对应的菜单
             break;
         case 2:
-            printf("please read file first\n\n");
-            break;
-        case 3:
-            printf("please read file first\n\n");
-            break;
-        case 4:
-            printf("please read file first\n\n");
+            removeAllFile();
             break;
         case 0:
-            removeAllFile();
             exit(0);
         default:
             printf("\t请输入正确的选项\n");
@@ -159,6 +150,7 @@ void linklist_menu()
         printf("\t4.删除\n");
         printf("\t5.插入\n");
         printf("\t6.更新\n");
+        printf("\t7.删除所有排序结果和查找结果\n");
         printf("\t0.退出\n");
         printf("\t请选择：");
 
@@ -170,6 +162,12 @@ void linklist_menu()
         switch(n) {
         case 1:
             m = readfile_menu();    //读取文件的方式
+            if(m != 0)
+            {
+                printf("正在删除链表\n");
+                destroyLink(head);
+                printf("删除成功\n\n");
+            }
             select_menu(m);    //转到相应的数据结构对应的菜单
             break;
         case 2:
@@ -194,8 +192,10 @@ void linklist_menu()
                 printf("rename SortGTBL.dat error, is SortGTBL.dat exist?\n");
             }
             break;
-        case 0:
+        case 7:
             removeAllFile();
+            break;
+        case 0:
             exit(0);
         default:
             printf("\t请输入正确的选项\n");
@@ -559,6 +559,7 @@ void tree_menu()
         printf("\t2.中序遍历并输出中序遍历结果(按linkid从小到大)到(\"SortGTBL.dat\")\n");
         printf("\t3.检索\n");
         printf("\t4.更新\n");
+        printf("\t5.删除所有排序结果和查找结果\n");
         printf("\t0.退出\n");
         printf("\t请选择：");
 
@@ -570,6 +571,12 @@ void tree_menu()
         switch(n) {
         case 1:
             m = readfile_menu();    //读取文件的方式
+            if(m != 0)
+            {
+                printf("正在删除二叉树");
+                destroyTree(top);
+                printf("删除成功\n\n");
+            }
             select_menu(m);    //转到相应的数据结构对应的菜单
             break;
         case 2:
@@ -591,8 +598,10 @@ void tree_menu()
                 printf("rename SortGTBL.dat error, is SortGTBL.dat exist?\n");
             }
             break;
-        case 0:
+        case 5:
             removeAllFile();
+            break;
+        case 0:
             exit(0);
         default:
             printf("\t请输入正确的选项\n");
@@ -709,6 +718,7 @@ void rbtree_menu()
         printf("\t1.读取文件(\"GTBL.dat\")\n");
         printf("\t2.中序遍历并输出中序遍历结果(按linkid从小到大)到(\"SortGTBL.dat\")\n");
         printf("\t3.更新\n");
+        printf("\t4.删除所有排序结果和查找结果\n");
         printf("\t0.退出\n");
         printf("\t请选择：");
 
@@ -720,6 +730,12 @@ void rbtree_menu()
         switch(n) {
         case 1:
             m = readfile_menu();    //读取文件的方式
+            if(m != 0)
+            {
+                printf("正在删除红黑树\n");
+                destroyRBTree(root->node);
+                printf("删除成功\n\n");
+            }
             select_menu(m);    //转到相应的数据结构对应的菜单
             break;
         case 2:
@@ -738,8 +754,10 @@ void rbtree_menu()
                 printf("rename SortGTBL.dat error, is SortGTBL.dat exist?\n");
             }
             break;
-        case 0:
+        case 4:
             removeAllFile();
+            break;
+        case 0:
             exit(0);
         default:
             printf("\t请输入正确的选项\n");

@@ -184,3 +184,19 @@ bool print_tree(tn_t top)
         return true;
     }
 }
+
+/*
+    函数名：destroyTree
+    函数功能：删除二叉查找树
+    参数：根节点 top
+    返回值：无
+*/
+void destroyTree(tn_t top)
+{
+    if(top != NULL)
+    {
+        destroyTree(top->lchild);
+        destroyTree(top->rchild);
+        free(top);
+    }
+}
